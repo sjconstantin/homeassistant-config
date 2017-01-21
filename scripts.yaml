@@ -1,0 +1,60 @@
+#####################
+## Scripts
+#####################
+  entry_lights_on:
+    alias: "Turn on entry lights"
+    sequence:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.back_porch_light, switch.garage_door, switch.garage_overhead
+      - service: light.turn_on
+        data:
+          entity_id: light.back_yard_post_light
+      # Disable automations so both entry switches can be set to on
+      - service: script.disable_entry_lights_automations
+      - service: switch.turn_on
+        data:
+          entity_id: switch.garage_entry, switch.kitchen_entry
+      # Let the system settle down before re-enabling automations
+      - delay:
+          seconds: 5
+      - service: script.enable_entry_lights_automations
+  ###
+  entry_lights_on_from_garage:
+    alias: "Turn on entry lights from garage"
+    sequence:
+      - service: script.entry_lights_on
+      - service: switch.turn_on
+        data:
+          entity_id: switch.hallway_overhead
+  ###
+  entry_lights_off:
+    alias: "Turn off entry lights"
+    sequence:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.back_porch_light, switch.garage_door, switch.garage_overhead
+      - service: light.turn_off
+        data:
+          entity_id: light.back_yard_post_light
+      - service: script.disable_entry_lights_automations
+      - service: switch.turn_off
+        data:
+          entity_id: switch.garage_entry, switch.kitchen_entry
+      # Let the system settle down before re-enabling automations
+      - delay:
+          seconds: 5
+      - service: script.enable_entry_lights_automations
+  ###
+  disable_entry_lights_automations:
+    alias: "Disable entry lights automations"
+    sequence:
+      - service: homeassistant.turn_off
+        entity_id: group.entry_lights_automations
+  ###
+  enable_entry_lights_automations:
+    alias: "Enable entry lights automations"
+    sequence:
+      - service: homeassistant.turn_on
+        entity_id: group.entry_lights_automations
+

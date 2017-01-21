@@ -1,0 +1,82 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude_home
+  longitude: !secret longitude_home
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret elevation_home
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: !secret time_zone_home
+
+  customize: !include customizations.xml
+
+# Enables logging
+logger:
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Enables the frontend
+frontend:
+
+http:
+  api_password: !secret api_password
+  ssl_certificate: !secret ssl_certificate
+  ssl_key: !secret ssl_key
+  base_url: !secret base_url
+
+# Checks for available updates
+updater:
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time.
+history:
+
+# View all events in a logbook
+logbook:
+
+# Track the sun
+sun:
+
+# Weather Prediction
+sensor:
+  platform: yr
+
+# Text to speech
+tts:
+  platform: google
+
+vera:
+  vera_controller_url: http://192.168.2.45:3480/
+
+mqtt:
+  broker: !secret mqtt_broker
+  port: !secret mqtt_port
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+
+device_tracker:
+  - platform: !secret device_tracker_platform
+    max_gps_accuracy: !secret device_tracker_max_gps_accuracy
+    waypoints: True
+    waypoint_whitelist:
+      - jon
+      - ram
+
+media_player:
+  - platform: kodi
+    host: !secret kodi_host
+    port: !secret kodi_port
+
+automation: !include automations.yaml
+group: !include groups.yaml
+script: !include scripts.yaml
+

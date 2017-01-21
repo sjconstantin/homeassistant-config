@@ -1,0 +1,54 @@
+    light.back_yard_post_light:
+       icon: mdi:lightbulb
+    light.kitchen_pendants:
+       icon: mdi:lightbulb
+    light.kitchen_spots:
+       icon: mdi:spotlight-beam
+    switch.back_porch_light:
+       icon: mdi:spotlight-beam
+    switch.garage_door:
+       icon: mdi:lightbulb
+    switch.garage_door_opener_1:
+       icon: mdi:garage
+    switch.garage_door_opener_2:
+       icon: mdi:garage
+    switch.garage_entry:
+       icon: mdi:lightbulb
+    switch.garage_overhead:
+       icon: mdi:lightbulb
+    switch.hallway_overhead:
+       icon: mdi:lightbulb
+    switch.kitchen_entry:
+       icon: mdi:lightbulb
+    switch.stairwell_lights:
+       icon: mdi:lightbulb
+    # Hide stuff 
+    automation.turn_on_entry_lights_from_garage_entry_switch:
+       hidden: true
+    automation.turn_on_entry_lights_from_kitchen_entry_switch:
+       hidden: true
+    automation.turn_off_entry_lights_from_garage_entry_switch:
+       hidden: true
+    automation.turn_off_entry_lights_from_kitchen_entry_switch:
+       hidden: true
+    automation.turn_on_entry_lights_when_i_arrive_after_sunset:
+       hidden: true
+    group.entry_lights:
+       hidden: true
+    group.entry_lights_switches:
+       hidden: true
+    media_player.directv_rid036090275573:
+       hidden: true
+    media_player.kodi:
+       hidden: true
+    script.disable_entry_lights_automations:
+       hidden: true
+    script.enable_entry_lights_automations:
+       hidden: true
+    script.entry_lights_off:
+       hidden: true
+    script.entry_lights_on:
+       hidden: true
+    script.entry_lights_on_from_garage:
+       hidden: true
+

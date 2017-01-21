@@ -1,0 +1,56 @@
+#####################
+## Automation
+#####################
+  ### 
+  - alias: 'Turn on entry lights when I arrive after sunset'
+    trigger:
+      platform: state
+      entity_id: !secret device_tracker_entity_ids
+      from: 'not_home'
+      to: 'home'
+    condition:
+      condition: sun
+      after: sunset
+    action:
+      service: script.entry_lights_on_from_garage
+  ###
+  - alias: 'Turn on entry lights from garage entry switch'
+    trigger:
+      platform: state
+      entity_id: switch.garage_entry
+      from: 'off'
+      to: 'on'
+    action:
+      service: script.entry_lights_on_from_garage
+  ###
+  - alias: 'Turn on entry lights from kitchen entry switch'
+    trigger:
+      platform: state
+      entity_id: switch.kitchen_entry
+      from: 'off'
+      to: 'on'
+    action:
+      service: script.entry_lights_on
+  ###
+  - alias: 'Turn off entry lights from garage entry switch'
+    trigger:
+      platform: state
+      entity_id: switch.garage_entry
+      from: 'on'
+      to: 'off'
+    action:
+      - service: script.entry_lights_off
+      - service: switch.turn_off
+        data:
+          entity_id: switch.hallway_overhead
+  ###
+  - alias: 'Turn off entry lights from kitchen entry switch'
+    trigger:
+      platform: state
+      entity_id: switch.kitchen_entry
+      from: 'on'
+      to: 'off'
+    action:
+      service: script.entry_lights_off
+
+
