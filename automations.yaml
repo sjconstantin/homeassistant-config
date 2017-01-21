@@ -5,9 +5,9 @@
   - alias: 'Turn on entry lights when I arrive after sunset'
     trigger:
       platform: state
-      entity_id: switch.garage_door_opener_1, switch.garage_door_opener_2
-      from: 'off'
-      to: 'on'
+      entity_id: !secret device_tracker_entity_ids
+      from: 'not_home'
+      to: 'home'
     condition:
       condition: sun
       after: sunset
