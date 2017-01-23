@@ -19,18 +19,6 @@
       - switch.garage_door_opener_2
       - switch.garage_entry
       - switch.garage_overhead
-  entry_lights:
-    name: 'Entry Lights'
-    entities:
-      - light.back_yard_post_light
-      - switch.back_porch_light
-      - switch.garage_door
-      - switch.garage_overhead
-  entry_lights_switches:
-    name: 'Entry Lights Switches'
-    entities:
-      - switch.garage_entry
-      - switch.kitchen_entry
   entry_lights_automations:
     name: 'Entry Lights Automations'
     entities:
