@@ -17,7 +17,7 @@
   - alias: 'Turn on entry lights from garage entry switch'
     trigger:
       platform: state
-      entity_id: switch.garage_entry
+      entity_id: switch.garage_entry_15
       from: 'off'
       to: 'on'
     action:
@@ -26,7 +26,7 @@
   - alias: 'Turn on entry lights from kitchen entry switch'
     trigger:
       platform: state
-      entity_id: switch.kitchen_entry
+      entity_id: switch.kitchen_entry_11
       from: 'off'
       to: 'on'
     action:
@@ -35,19 +35,19 @@
   - alias: 'Turn off entry lights from garage entry switch'
     trigger:
       platform: state
-      entity_id: switch.garage_entry
+      entity_id: switch.garage_entry_15
       from: 'on'
       to: 'off'
     action:
       - service: script.entry_lights_off
       - service: switch.turn_off
         data:
-          entity_id: switch.hallway_overhead
+          entity_id: switch.hallway_overhead_5
   ###
   - alias: 'Turn off entry lights from kitchen entry switch'
     trigger:
       platform: state
-      entity_id: switch.kitchen_entry
+      entity_id: switch.kitchen_entry_11
       from: 'on'
       to: 'off'
     action:

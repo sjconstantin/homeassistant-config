@@ -6,15 +6,15 @@
     sequence:
       - service: switch.turn_on
         data:
-          entity_id: switch.back_porch_light, switch.garage_door, switch.garage_overhead
+          entity_id: switch.back_porch_light_12, switch.garage_door_14, switch.garage_overhead_16
       - service: light.turn_on
         data:
-          entity_id: light.back_yard_post_light
+          entity_id: light.back_yard_post_light_13
       # Disable automations so both entry switches can be set to on
       - service: script.disable_entry_lights_automations
       - service: switch.turn_on
         data:
-          entity_id: switch.garage_entry, switch.kitchen_entry
+          entity_id: switch.garage_entry_15, switch.kitchen_entry_11
       # Let the system settle down before re-enabling automations
       - delay:
           seconds: 5
@@ -26,21 +26,21 @@
       - service: script.entry_lights_on
       - service: switch.turn_on
         data:
-          entity_id: switch.hallway_overhead
+          entity_id: switch.hallway_overhead_5
   ###
   entry_lights_off:
     alias: "Turn off entry lights"
     sequence:
       - service: switch.turn_off
         data:
-          entity_id: switch.back_porch_light, switch.garage_door, switch.garage_overhead
+          entity_id: switch.back_porch_light_12, switch.garage_door_14, switch.garage_overhead_16
       - service: light.turn_off
         data:
-          entity_id: light.back_yard_post_light
+          entity_id: light.back_yard_post_light_13
       - service: script.disable_entry_lights_automations
       - service: switch.turn_off
         data:
-          entity_id: switch.garage_entry, switch.kitchen_entry
+          entity_id: switch.garage_entry_15, switch.kitchen_entry_11
       # Let the system settle down before re-enabling automations
       - delay:
           seconds: 5

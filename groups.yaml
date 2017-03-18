@@ -4,21 +4,21 @@
   back_yard:
     name: 'Back Yard'
     entities:
-      - light.back_yard_post_light
-      - switch.back_porch_light
+      - light.back_yard_post_light_13
+      - switch.back_porch_light_12
   common:
     name: 'Common Area'
     entities:
-      - switch.hallway_overhead
-      - switch.stairwell_lights
+      - switch.hallway_overhead_5
+      - switch.stairwell_lights_24
   garage:
     name: 'Garage'
     entities:
-      - switch.garage_door
-      - switch.garage_door_opener_1
-      - switch.garage_door_opener_2
-      - switch.garage_entry
-      - switch.garage_overhead
+      - switch.garage_door_14
+      - switch.garage_door_opener_1_28
+      - switch.garage_door_opener_2_26
+      - switch.garage_entry_15
+      - switch.garage_overhead_16
   entry_lights_automations:
     name: 'Entry Lights Automations'
     entities:
@@ -30,8 +30,8 @@
   kitchen:
     name: 'Kitchen'
     entities:
-      - light.kitchen_pendants
-      - light.kitchen_spots
-      - switch.kitchen_entry
+      - light.kitchen_pendants_9
+      - light.kitchen_spots_10
+      - switch.kitchen_entry_11
 
 
