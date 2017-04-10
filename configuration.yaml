@@ -15,6 +15,7 @@ homeassistant:
 
 # Enables logging
 logger:
+  default: info
 
 # Show links to resources in log and frontend
 # introduction:
@@ -55,7 +56,10 @@ tts:
   platform: google
 
 vera:
-  vera_controller_url: http://192.168.2.45:3480/
+  vera_controller_url: !secret vera_controller_url
+
+ecobee:
+  api_key: !secret ecobee_api_key
 
 mqtt:
   broker: !secret mqtt_broker
