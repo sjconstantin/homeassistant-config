@@ -1,0 +1,27 @@
+  - name: email
+    platform: smtp
+    server: aspmx.l.google.com
+    port: 25
+#    server: smtp.gmail.com
+#    port: 587
+    timeout: 15
+    sender: !secret steve_email
+    encryption: none
+#    usernaname: !secret steve_email
+#    password: !secret smtp_password
+    recipient:
+      - !secret steve_email
+      - !secret dannette_email
+  - name: twilio_sms
+    platform: twilio_sms
+    from_number: !secret twilio_phone
+  - name: steve_dannette_sms
+    platform: group
+    services:
+      - service: twilio_sms
+        data:
+          target: !secret steve_phone
+      - service: twilio_sms
+        data:
+          target: !secret dannette_phone
+

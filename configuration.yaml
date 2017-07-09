@@ -75,6 +75,10 @@ device_tracker:
       - jon
       - ram
 
+twilio:
+  account_sid: !secret twilio_sid
+  auth_token: !secret twilio_auth_token
+
 media_player:
   - platform: kodi
     host: !secret kodi_host
@@ -83,4 +87,6 @@ media_player:
 automation: !include automations.yaml
 group: !include groups.yaml
 script: !include scripts.yaml
+notify: !include notify.yaml
+alert: !include alert.yaml
 

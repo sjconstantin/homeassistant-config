@@ -2,55 +2,59 @@
 ## Automation
 #####################
   ### 
-  - alias: 'Turn on entry lights when I arrive after sunset'
+  - id: turn_on_entry_lights_arrival
+    alias: 'Turn on entry lights when I arrive after sunset'
     trigger:
-      platform: state
+    - platform: state
       entity_id: !secret device_tracker_entity_ids
       from: 'not_home'
       to: 'home'
     condition:
-      condition: sun
+    - condition: sun
       after: sunset
     action:
-      service: script.entry_lights_on_from_garage
+    - service: script.entry_lights_on_from_garage
   ###
-  - alias: 'Turn on entry lights from garage entry switch'
+  - id: turn_on_entry_lights_garage
+    alias: 'Turn on entry lights from garage entry switch'
     trigger:
-      platform: state
+    - platform: state
       entity_id: switch.garage_entry_15
       from: 'off'
       to: 'on'
     action:
-      service: script.entry_lights_on_from_garage
+    - service: script.entry_lights_on_from_garage
   ###
-  - alias: 'Turn on entry lights from kitchen entry switch'
+  - id: turn_on_entry_lights_kitchen
+    alias: 'Turn on entry lights from kitchen entry switch'
     trigger:
-      platform: state
+    - platform: state
       entity_id: switch.kitchen_entry_11
       from: 'off'
       to: 'on'
     action:
-      service: script.entry_lights_on
+    - service: script.entry_lights_on
   ###
-  - alias: 'Turn off entry lights from garage entry switch'
+  - id: turn_off_entry_lights_garage
+    alias: 'Turn off entry lights from garage entry switch'
     trigger:
-      platform: state
+    - platform: state
       entity_id: switch.garage_entry_15
       from: 'on'
       to: 'off'
     action:
-      - service: script.entry_lights_off
-      - service: switch.turn_off
-        data:
-          entity_id: switch.hallway_overhead_5
+    - service: script.entry_lights_off
+    - service: switch.turn_off
+      data:
+        entity_id: switch.hallway_overhead_5
   ###
-  - alias: 'Turn off entry lights from kitchen entry switch'
+  - id: turn_on_entry_lights_kitchen
+    alias: 'Turn off entry lights from kitchen entry switch'
     trigger:
-      platform: state
+    - platform: state
       entity_id: switch.kitchen_entry_11
       from: 'on'
       to: 'off'
     action:
-      service: script.entry_lights_off
-
+    - service: script.entry_lights_off
 
