@@ -14,7 +14,7 @@
       - service: script.disable_entry_lights_automations
       - service: switch.turn_on
         data:
-          entity_id: switch.garage_entry_15, switch.kitchen_entry_11
+          entity_id: switch.garage_entry_30, switch.kitchen_entry_11
       # Let the system settle down before re-enabling automations
       - delay:
           seconds: 5
@@ -40,7 +40,7 @@
       - service: script.disable_entry_lights_automations
       - service: switch.turn_off
         data:
-          entity_id: switch.garage_entry_15, switch.kitchen_entry_11
+          entity_id: switch.garage_entry_30, switch.kitchen_entry_11
       # Let the system settle down before re-enabling automations
       - delay:
           seconds: 5
@@ -57,4 +57,22 @@
     sequence:
       - service: homeassistant.turn_on
         entity_id: group.entry_lights_automations
+  ###
+  reset_network:
+    sequence:
+      - service: switch.turn_off
+        data:
+          entity_id:
+            - switch.modem_29
+#            - switch.router_31
+      - delay: '00:00:20'
+      - service: switch.turn_on
+        data:
+          entity_id:
+            - switch.modem_29
+#      - delay: '00:01:00'
+#      - service: switch.turn_on
+#        data:
+#          entity_id:
+#            - switch.router_31
 

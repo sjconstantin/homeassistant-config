@@ -12,16 +12,20 @@
        icon: mdi:garage
     switch.garage_door_opener_2_26:
        icon: mdi:garage
-    switch.garage_entry_15:
+    switch.garage_entry_30:
        icon: mdi:lightbulb
     switch.garage_overhead_16:
        icon: mdi:lightbulb
     switch.hallway_overhead_5:
-       icon: mdi:lightbulb
+       icon: mdi:ceiling-light
     switch.kitchen_entry_11:
        icon: mdi:lightbulb
     switch.stairwell_lights_24:
-       icon: mdi:lightbulb
+       icon: mdi:ceiling-light
+    switch.modem_29:
+       icon: mdi:server-network
+    switch.router_31:
+       icon: mdi:router-wireless
     # Hide stuff 
     automation.turn_on_entry_lights_from_garage_entry_switch:
        hidden: true
@@ -36,6 +40,8 @@
     group.entry_lights:
        hidden: true
     group.entry_lights_switches:
+       hidden: true
+    group.presence_simulators:
        hidden: true
     media_player.directv_rid036090275573:
        hidden: true

@@ -19,7 +19,7 @@
     alias: 'Turn on entry lights from garage entry switch'
     trigger:
     - platform: state
-      entity_id: switch.garage_entry_15
+      entity_id: switch.garage_entry_30
       from: 'off'
       to: 'on'
     action:
@@ -39,7 +39,7 @@
     alias: 'Turn off entry lights from garage entry switch'
     trigger:
     - platform: state
-      entity_id: switch.garage_entry_15
+      entity_id: switch.garage_entry_30
       from: 'on'
       to: 'off'
     action:
@@ -57,4 +57,142 @@
       to: 'off'
     action:
     - service: script.entry_lights_off
+  ###
+  - id: simulate_arrival
+    alias: 'Simulate arrival'
+    trigger:
+    - platform: state
+      entity_id: group.all_devices
+      from: 'home'
+      to: 'not_home'
+    - platform: sun
+      event: sunset
+    - platform: event
+      event_type: event_simulate_arrival
+    condition:  
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: 'sun.sun'
+          state: 'below_horizon'
+        - condition: time
+          before: '22:00:00'
+        - condition: state
+          entity_id: group.all_devices
+          state: 'not_home'
+    action:
+      # https://home-assistant.io/cookbook/perform_actions_based_on_input_select/
+      # https://home-assistant.io/getting-started/scripts/
+      # delay up front a little bit
+      - delay: '00:{{ (range(10, 45) | random) }}:00'  
+      - service: switch.turn_on
+        data:
+          entity_id: switch.garage_entry_30
+      - delay: '00:{{ (range(2, 10) | random) }}:00'
+      # turn off entry lights
+      - service: switch.turn_off
+        data:
+          entity_id: switch.garage_entry_30
+      # generate an event to call again this automation rule
+      - event: event_simulate_arrival
+  ###
+  - id: simulate_kitchen_presence
+    alias: 'Simulate kitchen presence'
+    trigger:
+    - platform: state
+      entity_id: group.all_devices
+      from: 'home'
+      to: 'not_home'
+    - platform: time
+      at: '18:01:00'
+    - platform: time
+      at: '05:01:00'
+    - platform: event
+      event_type: event_simulate_kitchen_presence
+    condition:  
+      condition: or
+      conditions:
+        - condition: and
+          conditions:
+          - condition: time
+            after: '18:00:00'
+          - condition: time
+            before: '22:00:00'
+          - condition: state
+            entity_id: group.all_devices
+            state: 'not_home'
+        - condition: and
+          conditions:
+          - condition: time
+            after: '05:00:00'
+          - condition: time
+            before: '09:00:00'
+          - condition: state
+            entity_id: group.all_devices
+            state: 'not_home'
+    action:
+      # https://home-assistant.io/cookbook/perform_actions_based_on_input_select/
+      # https://home-assistant.io/getting-started/scripts/
+      - service: light.turn_on
+        data:
+          entity_id: light.kitchen_pendants_9
+      - delay: '00:{{ (range(10, 50) | random) }}:00'
+      # turn off all devices
+      - service: light.turn_off
+        data:
+          entity_id: light.kitchen_pendants_9
+      # wait a little bit before running again
+      - delay: '00:{{ (range(2, 20) | random) }}:00'  
+      # generate an event to call again this automation rule
+      - event: event_simulate_kitchen_presence
+  ###
+  - id: simulate_upstairs_presence
+    alias: 'Simulate upstairs presence'
+    trigger:
+    - platform: state
+      entity_id: group.all_devices
+      from: 'home'
+      to: 'not_home'
+    - platform: time
+      at: '18:01:00'
+    - platform: time
+      at: '05:01:00'
+    - platform: event
+      event_type: event_simulate_upstairs_presence
+    condition:  
+      condition: or
+      conditions:
+        - condition: and
+          conditions:
+          - condition: time
+            after: '18:00:00'
+          - condition: time
+            before: '23:00:00'
+          - condition: state
+            entity_id: group.all_devices
+            state: 'not_home'
+        - condition: and
+          conditions:
+          - condition: time
+            after: '05:00:00'
+          - condition: time
+            before: '09:00:00'
+          - condition: state
+            entity_id: group.all_devices
+            state: 'not_home'
+    action:
+      # https://home-assistant.io/cookbook/perform_actions_based_on_input_select/
+      # https://home-assistant.io/getting-started/scripts/
+      - service: switch.turn_on
+        data:
+          entity_id: switch.stairwell_lights_24
+      - delay: '00:{{ (range(5, 15) | random) }}:00'
+      # turn off all devices
+      - service: switch.turn_off
+        data:
+          entity_id: switch.stairwell_lights_24
+      # wait a little bit before running again
+      - delay: '00:{{ (range(5, 25) | random) }}:00'  
+      # generate an event to call again this automation rule
+      - event: event_simulate_upstairs_presence
 
