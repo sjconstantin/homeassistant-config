@@ -90,11 +90,23 @@
           entity_id: switch.garage_entry_30
       - delay: '00:{{ (range(2, 10) | random) }}:00'
       # turn off entry lights
+      - event: event_simulate_arrival_off
+      # generate an event to call again this automation rule
+      - event: event_simulate_arrival
+  ###
+  - id: simulate_arrival_off
+    alias: 'Simulate arrival off'
+    trigger:
+    - platform: event
+      event_type: event_simulate_arrival_off
+    condition:  
+      condition: state
+      entity_id: group.all_devices
+      state: 'not_home'
+    action:
       - service: switch.turn_off
         data:
           entity_id: switch.garage_entry_30
-      # generate an event to call again this automation rule
-      - event: event_simulate_arrival
   ###
   - id: simulate_kitchen_presence
     alias: 'Simulate kitchen presence'
@@ -138,13 +150,25 @@
           entity_id: light.kitchen_pendants_9
       - delay: '00:{{ (range(10, 50) | random) }}:00'
       # turn off all devices
-      - service: light.turn_off
-        data:
-          entity_id: light.kitchen_pendants_9
+      - event: event_simulate_kitchen_presence_off
       # wait a little bit before running again
       - delay: '00:{{ (range(2, 20) | random) }}:00'  
       # generate an event to call again this automation rule
       - event: event_simulate_kitchen_presence
+  ###
+  - id: simulate_kitchen_presence_off
+    alias: 'Simulate kitchen presence off'
+    trigger:
+    - platform: event
+      event_type: event_simulate_kitchen_presence_off
+    condition:  
+      condition: state
+      entity_id: group.all_devices
+      state: 'not_home'
+    action:
+      - service: light.turn_off
+        data:
+          entity_id: light.kitchen_pendants_9
   ###
   - id: simulate_upstairs_presence
     alias: 'Simulate upstairs presence'
@@ -188,11 +212,23 @@
           entity_id: switch.stairwell_lights_24
       - delay: '00:{{ (range(5, 15) | random) }}:00'
       # turn off all devices
-      - service: switch.turn_off
-        data:
-          entity_id: switch.stairwell_lights_24
+      - event: event_simulate_upstairs_presence_off
       # wait a little bit before running again
       - delay: '00:{{ (range(5, 25) | random) }}:00'  
       # generate an event to call again this automation rule
       - event: event_simulate_upstairs_presence
+  ###
+  - id: simulate_upstairs_presence_off
+    alias: 'Simulate upstairs presence off'
+    trigger:
+    - platform: event
+      event_type: event_simulate_upstairs_presence_off
+    condition:  
+      condition: state
+      entity_id: group.all_devices
+      state: 'not_home'
+    action:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.stairwell_lights_24
 
