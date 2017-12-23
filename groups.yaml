@@ -11,6 +11,7 @@
     entities:
       - switch.hallway_overhead_5
       - switch.stairwell_lights_24
+      - light.front_porch_light_32
   entry_lights_automations:
     name: 'Entry Lights Automations'
     entities:

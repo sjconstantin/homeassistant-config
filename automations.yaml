@@ -231,4 +231,26 @@
       - service: switch.turn_off
         data:
           entity_id: switch.stairwell_lights_24
+  ###
+  - id: turn_on_front_porch_light_at_dusk
+    alias: 'Turn on front porch light at dusk'
+    trigger:
+      platform: numeric_state
+      entity_id: sun.sun
+      value_template: '{{ state.attributes.elevation }}'
+      below: 2
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.front_porch_light_32
+  ###
+  - id: turn_off_front_porch_light_at_bedtime
+    alias: 'Turn off front porch light at bedtime'
+    trigger:
+      platform: time
+      at: '22:0:00'
+    action:
+      - service: light.turn_off
+        data:
+          entity_id: light.front_porch_light_32
 

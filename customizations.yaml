@@ -37,6 +37,22 @@
        hidden: true
     automation.turn_on_entry_lights_when_i_arrive_after_sunset:
        hidden: true
+    automation.simulate_arrival:
+       hidden: true
+    automation.simulate_arrival_off:
+       hidden: true
+    automation.simulate_kitchen_presence:
+       hidden: true
+    automation.simulate_kitchen_presence_off:
+       hidden: true
+    automation.simulate_upstairs_presence:
+       hidden: true
+    automation.simulate_upstairs_presence_off:
+       hidden: true
+    automation.turn_on_front_porch_light_at_dusk:
+       hidden: true
+    automation.turn_off_front_porch_light_at_bedtime:
+       hidden: true
     group.entry_lights:
        hidden: true
     group.entry_lights_switches:
@@ -57,4 +73,7 @@
        hidden: true
     script.entry_lights_on_from_garage:
        hidden: true
+    weather.upstairs:
+       hidden: true
+
 

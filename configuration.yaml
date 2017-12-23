@@ -75,6 +75,8 @@ device_tracker:
       - jon
       - ram
 
+map:
+
 twilio:
   account_sid: !secret twilio_sid
   auth_token: !secret twilio_auth_token
