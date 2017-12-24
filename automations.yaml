@@ -248,9 +248,75 @@
     alias: 'Turn off front porch light at bedtime'
     trigger:
       platform: time
-      at: '22:0:00'
+      at: '22:00:00'
     action:
       - service: light.turn_off
         data:
           entity_id: light.front_porch_light_32
+  ###
+  - id: turn_on_towel_warmer_weekday_mornings
+    alias: 'Turn on towel warmer weekday mornings'
+    trigger:
+      platform: time
+      at: '05:00:00'
+    condition:
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+    action:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.towel_warmer_33
+  ###
+  - id: turn_off_towel_warmer_weekday_mornings
+    alias: 'Turn off towel warmer weekday mornings'
+    trigger:
+      platform: time
+      at: '09:00:00'
+    condition:
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+    action:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.towel_warmer_33
+  ###
+  - id: turn_on_towel_warmer_weekend_mornings
+    alias: 'Turn on towel warmer weekend mornings'
+    trigger:
+      platform: time
+      at: '07:00:00'
+    condition:
+    - condition: time
+      weekday:
+        - sat
+        - sun
+    action:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.towel_warmer_33
+  ###
+  - id: turn_off_towel_warmer_weekend_mornings
+    alias: 'Turn off towel warmer weekend mornings'
+    trigger:
+      platform: time
+      at: '12:00:00'
+    condition:
+    - condition: time
+      weekday:
+        - sat
+        - sun
+    action:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.towel_warmer_33
 

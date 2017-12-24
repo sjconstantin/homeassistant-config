@@ -26,6 +26,8 @@
        icon: mdi:server-network
     switch.router_31:
        icon: mdi:router-wireless
+    switch.towel_warmer_33:
+       icon: mdi:radiator
     # Hide stuff 
     automation.turn_on_entry_lights_from_garage_entry_switch:
        hidden: true
@@ -53,6 +55,14 @@
        hidden: true
     automation.turn_off_front_porch_light_at_bedtime:
        hidden: true
+    automation.turn_on_towel_warmer_weekday_mornings:
+       hidden: true
+    automation.turn_off_towel_warmer_weekday_mornings:
+       hidden: true
+    automation.turn_on_towel_warmer_weekend_mornings:
+       hidden: true
+    automation.turn_off_towel_warmer_weekend_mornings:
+       hidden: true
     group.entry_lights:
        hidden: true
     group.entry_lights_switches:
@@ -75,5 +85,6 @@
        hidden: true
     weather.upstairs:
        hidden: true
-
+    weather.main_floor:
+       hidden: true
 
