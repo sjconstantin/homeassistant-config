@@ -8,10 +8,6 @@
        icon: mdi:spotlight-beam
     switch.garage_door_14:
        icon: mdi:lightbulb
-    switch.garage_door_opener_1_28:
-       icon: mdi:garage
-    switch.garage_door_opener_2_26:
-       icon: mdi:garage
     switch.garage_entry_30:
        icon: mdi:lightbulb
     switch.garage_overhead_16:
@@ -22,12 +18,16 @@
        icon: mdi:lightbulb
     switch.stairwell_lights_24:
        icon: mdi:ceiling-light
-    switch.modem_29:
-       icon: mdi:server-network
-    switch.router_31:
-       icon: mdi:router-wireless
     switch.towel_warmer_33:
        icon: mdi:radiator
+    cover.garage_door_1:
+       friendly_name: Garage Door 1
+       google_assistant: true
+       google_assistant_type: switch
+    cover.garage_door_2:
+       friendly_name: Garage Door 2
+       google_assistant: true
+       google_assistant_type: switch
     # Hide stuff 
     automation.turn_on_entry_lights_from_garage_entry_switch:
        hidden: true
@@ -67,7 +67,11 @@
        hidden: true
     group.entry_lights_switches:
        hidden: true
+    group.network:
+       hidden: true
     group.presence_simulators:
+       hidden: true
+    hangouts.conversations:
        hidden: true
     media_player.directv_rid036090275573:
        hidden: true
@@ -82,6 +86,12 @@
     script.entry_lights_on:
        hidden: true
     script.entry_lights_on_from_garage:
+       hidden: true
+    switch.modem_29:
+       hidden: true
+    switch.router_31:
+       hidden: true
+    script.reset_network:
        hidden: true
     weather.upstairs:
        hidden: true

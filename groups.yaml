@@ -11,7 +11,7 @@
     entities:
       - switch.hallway_overhead_5
       - switch.stairwell_lights_24
-      - light.front_porch_light_32
+      - light.front_porch_light_44
       - switch.towel_warmer_33
   entry_lights_automations:
     name: 'Entry Lights Automations'
@@ -25,8 +25,8 @@
     name: 'Garage'
     entities:
       - switch.garage_door_14
-      - switch.garage_door_opener_1_28
-      - switch.garage_door_opener_2_26
+      - cover.garage_door_1
+      - cover.garage_door_2
       - switch.garage_entry_30
       - switch.garage_overhead_16
   kitchen:

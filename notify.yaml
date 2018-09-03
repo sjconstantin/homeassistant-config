@@ -12,16 +12,8 @@
     recipient:
       - !secret steve_email
       - !secret dannette_email
-  - name: twilio_sms
-    platform: twilio_sms
-    from_number: !secret twilio_phone
-  - name: steve_dannette_sms
-    platform: group
-    services:
-      - service: twilio_sms
-        data:
-          target: !secret steve_phone
-      - service: twilio_sms
-        data:
-          target: !secret dannette_phone
+  - name: hangouts
+    platform: hangouts
+    default_conversations:
+      - id: "UgxLjK-Tn-TFK08Hs694AaABAQ"
 

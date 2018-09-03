@@ -9,6 +9,10 @@
       entity_id: !secret device_tracker_entity_ids
       from: 'not_home'
       to: 'home'
+    - platform: state
+      entity_id: !secret device_tracker_entity_ids
+      from: 'None'
+      to: 'home'
     condition:
     - condition: sun
       after: sunset
@@ -242,7 +246,7 @@
     action:
       - service: light.turn_on
         data:
-          entity_id: light.front_porch_light_32
+          entity_id: light.front_porch_light_44
   ###
   - id: turn_off_front_porch_light_at_bedtime
     alias: 'Turn off front porch light at bedtime'
@@ -252,7 +256,7 @@
     action:
       - service: light.turn_off
         data:
-          entity_id: light.front_porch_light_32
+          entity_id: light.front_porch_light_44
   ###
   - id: turn_on_towel_warmer_weekday_mornings
     alias: 'Turn on towel warmer weekday mornings'

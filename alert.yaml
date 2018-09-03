@@ -1,19 +1,21 @@
   garage_door_1:
     name: Garage door 1 is open
     done_message: Garage door 1 is closed
-    entity_id: switch.garage_door_opener_1_28
+    entity_id: cover.garage_door_1
+    state: 'open'
     repeat: 10
     skip_first: true
     notifiers:
-      - steve_dannette_sms
+      - hangouts
       - email
   garage_door_2:
     name: Garage door 2 is open
     done_message: Garage door 2 is closed
-    entity_id: switch.garage_door_opener_2_26
+    entity_id: cover.garage_door_2
+    state: 'open'
     repeat: 10
     skip_first: true
     notifiers:
-      - steve_dannette_sms
+      - hangouts
       - email
 

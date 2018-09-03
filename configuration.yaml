@@ -10,7 +10,6 @@ homeassistant:
   unit_system: imperial
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: !secret time_zone_home
-
   customize: !include customizations.yaml
 
 # Enables logging
@@ -23,11 +22,17 @@ logger:
 # Enables the frontend
 frontend:
 
+# Enables the configuration component
+config:
+
 http:
-  api_password: !secret api_password
+#  api_password: !secret api_password
   ssl_certificate: !secret ssl_certificate
   ssl_key: !secret ssl_key
   base_url: !secret base_url
+
+# history recording
+recorder:
 
 # Checks for available updates
 updater:
@@ -46,10 +51,6 @@ logbook:
 
 # Track the sun
 sun:
-
-# Weather Prediction
-sensor:
-  platform: yr
 
 # Text to speech
 tts:
@@ -77,18 +78,23 @@ device_tracker:
 
 map:
 
-twilio:
-  account_sid: !secret twilio_sid
-  auth_token: !secret twilio_auth_token
+google_assistant:
+  project_id: !secret google_project_id
+  client_id: !secret google_client_id
+  access_token: !secret google_access_token
+  agent_user_id: !secret google_agent_user_id
+  api_key: !secret google_api_key
 
 media_player:
   - platform: kodi
     host: !secret kodi_host
     port: !secret kodi_port
 
+cover: !include covers.yaml
 automation: !include automations.yaml
 group: !include groups.yaml
 script: !include scripts.yaml
 notify: !include notify.yaml
 alert: !include alert.yaml
+sensor: !include sensors.yaml
 
