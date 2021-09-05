@@ -1,19 +1,6 @@
-  - name: email
-    platform: smtp
-    server: aspmx.l.google.com
-    port: 25
-#    server: smtp.gmail.com
-#    port: 587
-    timeout: 15
-    sender: !secret steve_email
-    encryption: none
-#    usernaname: !secret steve_email
-#    password: !secret smtp_password
-    recipient:
-      - !secret steve_email
-      - !secret dannette_email
   - name: hangouts
     platform: hangouts
     default_conversations:
       - id: "UgxLjK-Tn-TFK08Hs694AaABAQ"
-
+  - name: notify.events
+    platform: notify_events

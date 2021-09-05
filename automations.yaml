@@ -1,326 +1,355 @@
-#####################
-## Automation
-#####################
-  ### 
-  - id: turn_on_entry_lights_arrival
-    alias: 'Turn on entry lights when I arrive after sunset'
-    trigger:
-    - platform: state
-      entity_id: !secret device_tracker_entity_ids
-      from: 'not_home'
-      to: 'home'
-    - platform: state
-      entity_id: !secret device_tracker_entity_ids
-      from: 'None'
-      to: 'home'
-    condition:
-    - condition: sun
-      after: sunset
-    action:
-    - service: script.entry_lights_on_from_garage
-  ###
-  - id: turn_on_entry_lights_garage
-    alias: 'Turn on entry lights from garage entry switch'
-    trigger:
-    - platform: state
-      entity_id: switch.garage_entry_30
-      from: 'off'
-      to: 'on'
-    action:
-    - service: script.entry_lights_on_from_garage
-  ###
-  - id: turn_on_entry_lights_kitchen
-    alias: 'Turn on entry lights from kitchen entry switch'
-    trigger:
-    - platform: state
-      entity_id: switch.kitchen_entry_11
-      from: 'off'
-      to: 'on'
-    action:
-    - service: script.entry_lights_on
-  ###
-  - id: turn_off_entry_lights_garage
-    alias: 'Turn off entry lights from garage entry switch'
-    trigger:
-    - platform: state
-      entity_id: switch.garage_entry_30
-      from: 'on'
-      to: 'off'
-    action:
-    - service: script.entry_lights_off
-    - service: switch.turn_off
-      data:
-        entity_id: switch.hallway_overhead_5
-  ###
-  - id: turn_on_entry_lights_kitchen
-    alias: 'Turn off entry lights from kitchen entry switch'
-    trigger:
-    - platform: state
-      entity_id: switch.kitchen_entry_11
-      from: 'on'
-      to: 'off'
-    action:
-    - service: script.entry_lights_off
-  ###
-  - id: simulate_arrival
-    alias: 'Simulate arrival'
-    trigger:
-    - platform: state
-      entity_id: group.all_devices
-      from: 'home'
-      to: 'not_home'
-    - platform: sun
-      event: sunset
-    - platform: event
-      event_type: event_simulate_arrival
-    condition:  
-      condition: and
-      conditions:
-        - condition: state
-          entity_id: 'sun.sun'
-          state: 'below_horizon'
-        - condition: time
-          before: '22:00:00'
-        - condition: state
-          entity_id: group.all_devices
-          state: 'not_home'
-    action:
-      # https://home-assistant.io/cookbook/perform_actions_based_on_input_select/
-      # https://home-assistant.io/getting-started/scripts/
-      # delay up front a little bit
-      - delay: '00:{{ (range(10, 45) | random) }}:00'  
-      - service: switch.turn_on
-        data:
-          entity_id: switch.garage_entry_30
-      - delay: '00:{{ (range(2, 10) | random) }}:00'
-      # turn off entry lights
-      - event: event_simulate_arrival_off
-      # generate an event to call again this automation rule
-      - event: event_simulate_arrival
-  ###
-  - id: simulate_arrival_off
-    alias: 'Simulate arrival off'
-    trigger:
-    - platform: event
-      event_type: event_simulate_arrival_off
-    condition:  
-      condition: state
-      entity_id: group.all_devices
-      state: 'not_home'
-    action:
-      - service: switch.turn_off
-        data:
-          entity_id: switch.garage_entry_30
-  ###
-  - id: simulate_kitchen_presence
-    alias: 'Simulate kitchen presence'
-    trigger:
-    - platform: state
-      entity_id: group.all_devices
-      from: 'home'
-      to: 'not_home'
-    - platform: time
-      at: '18:01:00'
-    - platform: time
-      at: '05:01:00'
-    - platform: event
-      event_type: event_simulate_kitchen_presence
-    condition:  
-      condition: or
-      conditions:
-        - condition: and
-          conditions:
-          - condition: time
-            after: '18:00:00'
-          - condition: time
-            before: '22:00:00'
-          - condition: state
-            entity_id: group.all_devices
-            state: 'not_home'
-        - condition: and
-          conditions:
-          - condition: time
-            after: '05:00:00'
-          - condition: time
-            before: '09:00:00'
-          - condition: state
-            entity_id: group.all_devices
-            state: 'not_home'
-    action:
-      # https://home-assistant.io/cookbook/perform_actions_based_on_input_select/
-      # https://home-assistant.io/getting-started/scripts/
-      - service: light.turn_on
-        data:
-          entity_id: light.kitchen_pendants_9
-      - delay: '00:{{ (range(10, 50) | random) }}:00'
-      # turn off all devices
-      - event: event_simulate_kitchen_presence_off
-      # wait a little bit before running again
-      - delay: '00:{{ (range(2, 20) | random) }}:00'  
-      # generate an event to call again this automation rule
-      - event: event_simulate_kitchen_presence
-  ###
-  - id: simulate_kitchen_presence_off
-    alias: 'Simulate kitchen presence off'
-    trigger:
-    - platform: event
-      event_type: event_simulate_kitchen_presence_off
-    condition:  
-      condition: state
-      entity_id: group.all_devices
-      state: 'not_home'
-    action:
-      - service: light.turn_off
-        data:
-          entity_id: light.kitchen_pendants_9
-  ###
-  - id: simulate_upstairs_presence
-    alias: 'Simulate upstairs presence'
-    trigger:
-    - platform: state
-      entity_id: group.all_devices
-      from: 'home'
-      to: 'not_home'
-    - platform: time
-      at: '18:01:00'
-    - platform: time
-      at: '05:01:00'
-    - platform: event
-      event_type: event_simulate_upstairs_presence
-    condition:  
-      condition: or
-      conditions:
-        - condition: and
-          conditions:
-          - condition: time
-            after: '18:00:00'
-          - condition: time
-            before: '23:00:00'
-          - condition: state
-            entity_id: group.all_devices
-            state: 'not_home'
-        - condition: and
-          conditions:
-          - condition: time
-            after: '05:00:00'
-          - condition: time
-            before: '09:00:00'
-          - condition: state
-            entity_id: group.all_devices
-            state: 'not_home'
-    action:
-      # https://home-assistant.io/cookbook/perform_actions_based_on_input_select/
-      # https://home-assistant.io/getting-started/scripts/
-      - service: switch.turn_on
-        data:
-          entity_id: switch.stairwell_lights_24
-      - delay: '00:{{ (range(5, 15) | random) }}:00'
-      # turn off all devices
-      - event: event_simulate_upstairs_presence_off
-      # wait a little bit before running again
-      - delay: '00:{{ (range(5, 25) | random) }}:00'  
-      # generate an event to call again this automation rule
-      - event: event_simulate_upstairs_presence
-  ###
-  - id: simulate_upstairs_presence_off
-    alias: 'Simulate upstairs presence off'
-    trigger:
-    - platform: event
-      event_type: event_simulate_upstairs_presence_off
-    condition:  
-      condition: state
-      entity_id: group.all_devices
-      state: 'not_home'
-    action:
-      - service: switch.turn_off
-        data:
-          entity_id: switch.stairwell_lights_24
-  ###
-  - id: turn_on_front_porch_light_at_dusk
-    alias: 'Turn on front porch light at dusk'
-    trigger:
-      platform: numeric_state
+- id: turn_on_entry_lights_arrival
+  alias: Turn on entry lights when I arrive after sunset
+  trigger:
+  - platform: state
+    entity_id: person.steve
+    from: not_home
+    to: home
+  - platform: state
+    entity_id: person.dannette
+    from: not_home
+    to: home
+  condition:
+  - condition: sun
+    after: sunset
+  action:
+  - service: script.entry_lights_on_from_garage
+
+
+- id: turn_on_entry_lights_garage
+  alias: Turn on entry lights from garage entry switch
+  trigger:
+  - entity_id: switch.garage_entry_30
+    from: 'off'
+    platform: state
+    to: 'on'
+  action:
+  - data: {}
+    entity_id: automation.turn_on_entry_lights_from_kitchen_entry_switch
+    service: automation.turn_off
+  - service: script.entry_lights_on_from_garage
+  - data: {}
+    entity_id: automation.turn_on_entry_lights_from_kitchen_entry_switch
+    service: automation.turn_on
+  mode: single
+
+- id: turn_on_entry_lights_kitchen
+  alias: Turn on entry lights from kitchen entry switch
+  trigger:
+  - platform: state
+    entity_id: switch.kitchen_entry_11
+    from: 'off'
+    to: 'on'
+  action:
+  - data: {}
+    entity_id: automation.turn_on_entry_lights_from_garage_entry_switch
+    service: automation.turn_off
+  - service: script.entry_lights_on
+  - data: {}
+    entity_id: automation.turn_on_entry_lights_from_garage_entry_switch
+    service: automation.turn_on
+- id: turn_off_entry_lights_garage
+  alias: Turn off entry lights from garage entry switch
+  trigger:
+  - platform: state
+    entity_id: switch.garage_entry_30
+    from: 'on'
+    to: 'off'
+  action:
+  - data: {}
+    entity_id: automation.turn_off_entry_lights_from_kitchen_entry_switch
+    service: automation.turn_off
+  - service: script.entry_lights_off
+  - service: switch.turn_off
+    data:
+      entity_id: switch.hallway_overhead_5
+  - data: {}
+    entity_id: automation.turn_off_entry_lights_from_kitchen_entry_switch
+    service: automation.turn_on
+
+- id: turn_off_entry_lights_kitchen
+  alias: Turn off entry lights from kitchen entry switch
+  trigger:
+  - platform: state
+    entity_id: switch.kitchen_entry_11
+    from: 'on'
+    to: 'off'
+  action:
+  - data: {}
+    entity_id: automation.turn_off_entry_lights_from_garage_entry_switch
+    service: automation.turn_off
+  - service: script.entry_lights_off
+  - data: {}
+    entity_id: automation.turn_off_entry_lights_from_garage_entry_switch
+    service: automation.turn_on
+- id: turn_on_towel_warmer_weekday_mornings
+  alias: Turn on towel warmer weekday mornings
+  trigger:
+    platform: time
+    at: 05:00:00
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - service: switch.turn_on
+    data:
+      entity_id: switch.towel_warmer_33
+- id: turn_off_towel_warmer_weekday_mornings
+  alias: Turn off towel warmer weekday mornings
+  trigger:
+    platform: time
+    at: 09:00:00
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - service: switch.turn_off
+    data:
+      entity_id: switch.towel_warmer_33
+- id: turn_on_towel_warmer_weekend_mornings
+  alias: Turn on towel warmer weekend mornings
+  trigger:
+    platform: time
+    at: 07:00:00
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun
+  action:
+  - service: switch.turn_on
+    data:
+      entity_id: switch.towel_warmer_33
+- id: turn_off_towel_warmer_weekend_mornings
+  alias: Turn off towel warmer weekend mornings
+  trigger:
+    platform: time
+    at: '12:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun
+  action:
+  - service: switch.turn_off
+    data:
+      entity_id: switch.towel_warmer_33
+- id: '1589936680579'
+  alias: turn_on_outdoor_lights_at_dusk
+  description: Turn on outdoor lights at dusk
+  trigger:
+  - below: '2'
+    entity_id: sun.sun
+    platform: numeric_state
+    value_template: '{{ state.attributes.elevation }}'
+  condition: []
+  action:
+  - data: {}
+    entity_id: switch.patio_lights_49
+    service: switch.turn_on
+  - data: {}
+    entity_id: switch.patio_tree_spots_50
+    service: switch.turn_on
+  - data: {}
+    entity_id: light.front_porch_light_48
+    service: light.turn_on
+- id: '1589937131228'
+  alias: turn_off_outdoor_lights_at_bedtime
+  description: Turn off outdoor lights at bedtime
+  trigger:
+  - at: '23:00:00'
+    platform: time
+  condition: []
+  action:
+  - data: {}
+    entity_id: switch.patio_lights_49
+    service: switch.turn_off
+  - data: {}
+    entity_id: switch.patio_tree_spots_50
+    service: switch.turn_off
+  - data: {}
+    entity_id: light.front_porch_light_48
+    service: light.turn_off
+- id: '1607698084703'
+  alias: Update Google Assistant at HA startup
+  description: ''
+  trigger:
+  - platform: homeassistant
+    event: start
+  condition: []
+  action:
+  - service: google_assistant.request_sync
+    data: {}
+  mode: single
+
+### Simulate Arrival
+- id: simulate_arrival
+  alias: Simulate arrival
+  trigger:
+  - platform: state
+    entity_id: alarm_control_panel.abode_alarm
+    to: armed_away
+  - platform: sun
+    event: sunset
+  - platform: event
+    event_type: event_simulate_arrival
+  condition:
+    condition: and
+    conditions:
+    - condition: state
       entity_id: sun.sun
-      value_template: '{{ state.attributes.elevation }}'
-      below: 2
-    action:
-      - service: light.turn_on
-        data:
-          entity_id: light.front_porch_light_44
-  ###
-  - id: turn_off_front_porch_light_at_bedtime
-    alias: 'Turn off front porch light at bedtime'
-    trigger:
-      platform: time
-      at: '22:00:00'
-    action:
-      - service: light.turn_off
-        data:
-          entity_id: light.front_porch_light_44
-  ###
-  - id: turn_on_towel_warmer_weekday_mornings
-    alias: 'Turn on towel warmer weekday mornings'
-    trigger:
-      platform: time
-      at: '05:00:00'
-    condition:
+      state: below_horizon
     - condition: time
-      weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
-    action:
-      - service: switch.turn_on
-        data:
-          entity_id: switch.towel_warmer_33
-  ###
-  - id: turn_off_towel_warmer_weekday_mornings
-    alias: 'Turn off towel warmer weekday mornings'
-    trigger:
-      platform: time
-      at: '09:00:00'
-    condition:
-    - condition: time
-      weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
-    action:
-      - service: switch.turn_off
-        data:
-          entity_id: switch.towel_warmer_33
-  ###
-  - id: turn_on_towel_warmer_weekend_mornings
-    alias: 'Turn on towel warmer weekend mornings'
-    trigger:
-      platform: time
-      at: '07:00:00'
-    condition:
-    - condition: time
-      weekday:
-        - sat
-        - sun
-    action:
-      - service: switch.turn_on
-        data:
-          entity_id: switch.towel_warmer_33
-  ###
-  - id: turn_off_towel_warmer_weekend_mornings
-    alias: 'Turn off towel warmer weekend mornings'
-    trigger:
-      platform: time
-      at: '12:00:00'
-    condition:
-    - condition: time
-      weekday:
-        - sat
-        - sun
-    action:
-      - service: switch.turn_off
-        data:
-          entity_id: switch.towel_warmer_33
+      before: '22:00:00'
+    - condition: state
+      entity_id: alarm_control_panel.abode_alarm
+      state: armed_away
+  action:
+  - delay: 00:{{ (range(10, 45) | random) }}:00
+  - service: switch.turn_on
+    data:
+      entity_id: switch.garage_entry_30
+  - delay: 00:{{ (range(2, 10) | random) }}:00
+  - event: event_simulate_arrival_off
+  - event: event_simulate_arrival
+
+- id: simulate_arrival_off
+  alias: Simulate arrival off
+  trigger:
+  - platform: event
+    event_type: event_simulate_arrival_off
+  condition:
+    condition: state
+    entity_id: alarm_control_panel.abode_alarm
+    state: armed_away
+  action:
+  - service: switch.turn_off
+    data:
+      entity_id: switch.garage_entry_30
+
+### Simulate Kitchen Presence
+- id: simulate_kitchen_presence
+  alias: Simulate kitchen presence
+  trigger:
+  - platform: state
+    entity_id: alarm_control_panel.abode_alarm
+    to: armed_away
+  - platform: time
+    at: '18:01:00'
+  - platform: time
+    at: 05:01:00
+  - platform: event
+    event_type: event_simulate_kitchen_presence
+  condition:
+    condition: or
+    conditions:
+    - condition: and
+      conditions:
+      - condition: time
+        after: '18:00:00'
+      - condition: time
+        before: '22:00:00'
+      - condition: state
+        entity_id: alarm_control_panel.abode_alarm
+        state: armed_away
+    - condition: and
+      conditions:
+      - condition: time
+        after: 05:00:00
+      - condition: time
+        before: 09:00:00
+      - condition: state
+        entity_id: alarm_control_panel.abode_alarm
+        state: armed_away
+  action:
+  - service: light.turn_on
+    data:
+      entity_id: light.kitchen_pendants_9
+  - delay: 00:{{ (range(10, 50) | random) }}:00
+  - event: event_simulate_kitchen_presence_off
+  - delay: 00:{{ (range(2, 20) | random) }}:00
+  - event: event_simulate_kitchen_presence
+
+- id: simulate_kitchen_presence_off
+  alias: Simulate kitchen presence off
+  trigger:
+  - platform: event
+    event_type: event_simulate_kitchen_presence_off
+  condition:
+    condition: state
+    entity_id: alarm_control_panel.abode_alarm
+    state: armed_away
+  action:
+  - service: light.turn_off
+    data:
+      entity_id: light.kitchen_pendants_9
+
+### Simulate Upstairs Presence
+- id: simulate_upstairs_presence
+  alias: Simulate upstairs presence
+  trigger:
+  - platform: state
+    entity_id: alarm_control_panel.abode_alarm
+    to: armed_away
+  - platform: time
+    at: '18:01:00'
+  - platform: time
+    at: 05:01:00
+  - platform: event
+    event_type: event_simulate_upstairs_presence
+  condition:
+    condition: or
+    conditions:
+    - condition: and
+      conditions:
+      - condition: time
+        after: '18:00:00'
+      - condition: time
+        before: '23:00:00'
+      - condition: state
+        entity_id: alarm_control_panel.abode_alarm
+        state: armed_away
+    - condition: and
+      conditions:
+      - condition: time
+        after: 05:00:00
+      - condition: time
+        before: 09:00:00
+      - condition: state
+        entity_id: alarm_control_panel.abode_alarm
+        state: armed_away
+  action:
+  - service: switch.turn_on
+    data:
+      entity_id: switch.stairwell_lights_24
+  - delay: 00:{{ (range(5, 15) | random) }}:00
+  - event: event_simulate_upstairs_presence_off
+  - delay: 00:{{ (range(5, 25) | random) }}:00
+  - event: event_simulate_upstairs_presence
+
+- id: simulate_upstairs_presence_off
+  alias: Simulate upstairs presence off
+  trigger:
+  - platform: event
+    event_type: event_simulate_upstairs_presence_off
+  condition:
+    condition: state
+    entity_id: alarm_control_panel.abode_alarm
+    state: armed_away
+  action:
+  - service: switch.turn_off
+    data:
+      entity_id: switch.stairwell_lights_24
+
+
 

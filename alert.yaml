@@ -7,7 +7,7 @@
     skip_first: true
     notifiers:
       - hangouts
-      - email
+      - notify_events
   garage_door_2:
     name: Garage door 2 is open
     done_message: Garage door 2 is closed
@@ -17,5 +17,5 @@
     skip_first: true
     notifiers:
       - hangouts
-      - email
+      - notify_events
 

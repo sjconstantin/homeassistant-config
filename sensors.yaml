@@ -1,5 +1,5 @@
   # Weather Prediction
-  - platform: yr
+#  - platform: weather_data
   # Garage Doors
   - platform: template
     sensors:

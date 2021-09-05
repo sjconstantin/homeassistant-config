@@ -4,10 +4,16 @@
        icon: mdi:lightbulb
     light.kitchen_spots_10:
        icon: mdi:spotlight-beam
+    light.front_porch_light_48:
+       icon: mdi:coach-lamp
     switch.back_porch_light_12:
        icon: mdi:spotlight-beam
-    switch.garage_door_14:
+    switch.patio_lights_49:
        icon: mdi:lightbulb
+    switch.patio_tree_spots_50:
+       icon: mdi:spotlight-beam
+    switch.garage_door_14:
+       icon: mdi:coach-lamp
     switch.garage_entry_30:
        icon: mdi:lightbulb
     switch.garage_overhead_16:
@@ -28,73 +34,4 @@
        friendly_name: Garage Door 2
        google_assistant: true
        google_assistant_type: switch
-    # Hide stuff 
-    automation.turn_on_entry_lights_from_garage_entry_switch:
-       hidden: true
-    automation.turn_on_entry_lights_from_kitchen_entry_switch:
-       hidden: true
-    automation.turn_off_entry_lights_from_garage_entry_switch:
-       hidden: true
-    automation.turn_off_entry_lights_from_kitchen_entry_switch:
-       hidden: true
-    automation.turn_on_entry_lights_when_i_arrive_after_sunset:
-       hidden: true
-    automation.simulate_arrival:
-       hidden: true
-    automation.simulate_arrival_off:
-       hidden: true
-    automation.simulate_kitchen_presence:
-       hidden: true
-    automation.simulate_kitchen_presence_off:
-       hidden: true
-    automation.simulate_upstairs_presence:
-       hidden: true
-    automation.simulate_upstairs_presence_off:
-       hidden: true
-    automation.turn_on_front_porch_light_at_dusk:
-       hidden: true
-    automation.turn_off_front_porch_light_at_bedtime:
-       hidden: true
-    automation.turn_on_towel_warmer_weekday_mornings:
-       hidden: true
-    automation.turn_off_towel_warmer_weekday_mornings:
-       hidden: true
-    automation.turn_on_towel_warmer_weekend_mornings:
-       hidden: true
-    automation.turn_off_towel_warmer_weekend_mornings:
-       hidden: true
-    group.entry_lights:
-       hidden: true
-    group.entry_lights_switches:
-       hidden: true
-    group.network:
-       hidden: true
-    group.presence_simulators:
-       hidden: true
-    hangouts.conversations:
-       hidden: true
-    media_player.directv_rid036090275573:
-       hidden: true
-    media_player.kodi:
-       hidden: true
-    script.disable_entry_lights_automations:
-       hidden: true
-    script.enable_entry_lights_automations:
-       hidden: true
-    script.entry_lights_off:
-       hidden: true
-    script.entry_lights_on:
-       hidden: true
-    script.entry_lights_on_from_garage:
-       hidden: true
-    switch.modem_29:
-       hidden: true
-    switch.router_31:
-       hidden: true
-    script.reset_network:
-       hidden: true
-    weather.upstairs:
-       hidden: true
-    weather.main_floor:
-       hidden: true
 

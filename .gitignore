@@ -11,3 +11,11 @@
 /home-assistant_v2.db-wal
 /.storage/
 /creds.data
+
+automations-backup.yaml
+
+*.pickle
+
+SERVICE_ACCOUNT.json
+
+gactions

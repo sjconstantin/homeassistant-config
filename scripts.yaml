@@ -1,78 +1,60 @@
-#####################
-## Scripts
-#####################
-  entry_lights_on:
-    alias: "Turn on entry lights"
-    sequence:
-      - service: switch.turn_on
-        data:
-          entity_id: switch.back_porch_light_12, switch.garage_door_14, switch.garage_overhead_16
-      - service: light.turn_on
-        data:
-          entity_id: light.back_yard_post_light_13
-      # Disable automations so both entry switches can be set to on
-      - service: script.disable_entry_lights_automations
-      - service: switch.turn_on
-        data:
-          entity_id: switch.garage_entry_30, switch.kitchen_entry_11
-      # Let the system settle down before re-enabling automations
-      - delay:
-          seconds: 5
-      - service: script.enable_entry_lights_automations
-  ###
-  entry_lights_on_from_garage:
-    alias: "Turn on entry lights from garage"
-    sequence:
-      - service: script.entry_lights_on
-      - service: switch.turn_on
-        data:
-          entity_id: switch.hallway_overhead_5
-  ###
-  entry_lights_off:
-    alias: "Turn off entry lights"
-    sequence:
-      - service: switch.turn_off
-        data:
-          entity_id: switch.back_porch_light_12, switch.garage_door_14, switch.garage_overhead_16
-      - service: light.turn_off
-        data:
-          entity_id: light.back_yard_post_light_13
-      - service: script.disable_entry_lights_automations
-      - service: switch.turn_off
-        data:
-          entity_id: switch.garage_entry_30, switch.kitchen_entry_11
-      # Let the system settle down before re-enabling automations
-      - delay:
-          seconds: 5
-      - service: script.enable_entry_lights_automations
-  ###
-  disable_entry_lights_automations:
-    alias: "Disable entry lights automations"
-    sequence:
-      - service: homeassistant.turn_off
-        entity_id: group.entry_lights_automations
-  ###
-  enable_entry_lights_automations:
-    alias: "Enable entry lights automations"
-    sequence:
-      - service: homeassistant.turn_on
-        entity_id: group.entry_lights_automations
-  ###
-  reset_network:
-    sequence:
-      - service: switch.turn_off
-        data:
-          entity_id:
-            - switch.modem_29
-#            - switch.router_31
-      - delay: '00:00:20'
-      - service: switch.turn_on
-        data:
-          entity_id:
-            - switch.modem_29
-#      - delay: '00:01:00'
-#      - service: switch.turn_on
-#        data:
-#          entity_id:
-#            - switch.router_31
-
+entry_lights_on:
+  alias: Turn on entry lights
+  sequence:
+  - data:
+      entity_id: switch.kitchen_entry_11, switch.back_porch_light_12, switch.garage_door_14,
+        switch.garage_overhead_16, switch.garage_entry_30
+    service: switch.turn_on
+  - data:
+      entity_id: light.back_yard_post_light_13
+    service: light.turn_on
+  mode: single
+entry_lights_on_from_garage:
+  alias: Turn on entry lights from garage
+  sequence:
+  - data:
+      entity_id: switch.hallway_overhead_5
+    service: switch.turn_on
+  - service: script.entry_lights_on
+  mode: single
+entry_lights_off:
+  alias: Turn off entry lights
+  sequence:
+  - data:
+      entity_id: switch.kitchen_entry_11, switch.back_porch_light_12, switch.garage_door_14,
+        switch.garage_overhead_16, switch.garage_entry_30
+    service: switch.turn_off
+  - data:
+      entity_id: light.back_yard_post_light_13
+    service: light.turn_off
+  mode: single
+disable_entry_lights_automations:
+  alias: Disable entry lights automations
+  sequence:
+  - service: homeassistant.turn_off
+    entity_id: group.entry_lights_automations
+enable_entry_lights_automations:
+  alias: Enable entry lights automations
+  sequence:
+  - service: homeassistant.turn_on
+    entity_id: group.entry_lights_automations
+reset_network:
+  sequence:
+  - service: switch.turn_off
+    data:
+      entity_id:
+      - switch.modem_29
+  - delay: 00:00:20
+  - service: switch.turn_on
+    data:
+      entity_id:
+      - switch.modem_29
+turn_on_entry_lights_when_leaving_after_dark:
+  alias: Turn on entry lights when leaving after dark
+  sequence:
+  - condition: sun
+    after: sunset
+  - service: switch.turn_on
+    data: {}
+    entity_id: switch.kitchen_entry_11
+  mode: single

@@ -6,12 +6,14 @@
     entities:
       - light.back_yard_post_light_13
       - switch.back_porch_light_12
+      - switch.patio_lights_49
+      - switch.patio_tree_spots_50
   common:
     name: 'Common Area'
     entities:
       - switch.hallway_overhead_5
       - switch.stairwell_lights_24
-      - light.front_porch_light_44
+      - light.front_porch_light_48
       - switch.towel_warmer_33
   entry_lights_automations:
     name: 'Entry Lights Automations'
@@ -46,3 +48,8 @@
       - light.kitchen_pendants_9
       - switch.hallway_overhead_5
       - switch.stairwell_lights_24
+  tracker_devices:
+    entities:
+      - device_tracker.eswzcmgq_steve_android
+      - device_tracker.eswzcmgq_dannette_android
+
