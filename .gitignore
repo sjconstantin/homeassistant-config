@@ -19,3 +19,5 @@ automations-backup.yaml
 SERVICE_ACCOUNT.json
 
 gactions
+*.log.*
+*.yaml.deprecated

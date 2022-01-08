@@ -1,29 +1,15 @@
-    light.back_yard_post_light_13:
-       icon: mdi:lightbulb
-    light.kitchen_pendants_9:
-       icon: mdi:lightbulb
-    light.kitchen_spots_10:
-       icon: mdi:spotlight-beam
     light.front_porch_light_48:
        icon: mdi:coach-lamp
     switch.back_porch_light_12:
        icon: mdi:spotlight-beam
-    switch.patio_lights_49:
-       icon: mdi:lightbulb
     switch.patio_tree_spots_50:
        icon: mdi:spotlight-beam
-    switch.garage_door_14:
-       icon: mdi:coach-lamp
-    switch.garage_entry_30:
-       icon: mdi:lightbulb
     switch.garage_overhead_16:
        icon: mdi:lightbulb
     switch.hallway_overhead_5:
        icon: mdi:ceiling-light
     switch.kitchen_entry_11:
        icon: mdi:lightbulb
-    switch.stairwell_lights_24:
-       icon: mdi:ceiling-light
     switch.towel_warmer_33:
        icon: mdi:radiator
     cover.garage_door_1:

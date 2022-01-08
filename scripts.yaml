@@ -1,12 +1,19 @@
 entry_lights_on:
   alias: Turn on entry lights
   sequence:
-  - data:
-      entity_id: switch.kitchen_entry_11, switch.back_porch_light_12, switch.garage_door_14,
-        switch.garage_overhead_16, switch.garage_entry_30
+  - data: {}
     service: switch.turn_on
+    target:
+      entity_id:
+      - switch.kitchen_entry_11
+      - switch.back_porch_light_12
+      - switch.garage_door_51
+      - switch.garage_overhead_16
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.garage_entry
   - data:
-      entity_id: light.back_yard_post_light_13
+      entity_id: light.post_light_52
     service: light.turn_on
   mode: single
 entry_lights_on_from_garage:
@@ -20,12 +27,19 @@ entry_lights_on_from_garage:
 entry_lights_off:
   alias: Turn off entry lights
   sequence:
-  - data:
-      entity_id: switch.kitchen_entry_11, switch.back_porch_light_12, switch.garage_door_14,
-        switch.garage_overhead_16, switch.garage_entry_30
+  - data: {}
     service: switch.turn_off
+    target:
+      entity_id:
+      - switch.kitchen_entry_11
+      - switch.back_porch_light_12
+      - switch.garage_door_51
+      - switch.garage_overhead_16
+  - service: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.garage_entry
   - data:
-      entity_id: light.back_yard_post_light_13
+      entity_id: light.post_light_52
     service: light.turn_off
   mode: single
 disable_entry_lights_automations:

@@ -4,7 +4,7 @@
   back_yard:
     name: 'Back Yard'
     entities:
-      - light.back_yard_post_light_13
+      - light.post_light_52
       - switch.back_porch_light_12
       - switch.patio_lights_49
       - switch.patio_tree_spots_50
@@ -26,10 +26,10 @@
   garage:
     name: 'Garage'
     entities:
-      - switch.garage_door_14
+      - switch.garage_door_51
       - cover.garage_door_1
       - cover.garage_door_2
-      - switch.garage_entry_30
+      - input_boolean.garage_entry
       - switch.garage_overhead_16
   kitchen:
     name: 'Kitchen'

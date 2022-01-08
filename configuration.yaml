@@ -51,6 +51,9 @@ logbook:
 # Track the sun
 sun:
 
+# Enable boolean helper
+input_boolean:
+
 # Text to speech
 tts:
   platform: google_translate
@@ -92,11 +95,12 @@ media_player:
     host: !secret kodi_host
     port: !secret kodi_port
 
-cover: !include covers.yaml
+#cover: !include covers.yaml
 automation: !include automations.yaml
 group: !include groups.yaml
 script: !include scripts.yaml
 notify: !include notify.yaml
 alert: !include alert.yaml
-sensor: !include sensors.yaml
+template: !include template.yaml
+#sensor: !include sensors.yaml
 

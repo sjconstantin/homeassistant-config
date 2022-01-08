@@ -1,0 +1,20 @@
+  - sensor:
+      - name: "Garage 1 Occupied"
+        state: >
+          {% if is_state('cover.garage_door_1', 'open') %}
+            n/a
+          {% elif is_state('binary_sensor.my_opengarage_vehicle', 'on') %}
+            Yes
+          {% else %}
+            No
+          {% endif %}
+      - name: "Garage 2 Occupied"
+        state: >
+          {% if is_state('cover.garage_door_2', 'open') %}
+            n/a
+          {% elif is_state('binary_sensor.my_opengarage_vehicle_2', 'on') %}
+            Yes
+          {% else %}
+            No
+          {% endif %}
+

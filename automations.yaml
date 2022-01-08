@@ -14,12 +14,10 @@
     after: sunset
   action:
   - service: script.entry_lights_on_from_garage
-
-
 - id: turn_on_entry_lights_garage
   alias: Turn on entry lights from garage entry switch
   trigger:
-  - entity_id: switch.garage_entry_30
+  - entity_id: input_boolean.garage_entry
     from: 'off'
     platform: state
     to: 'on'
@@ -32,7 +30,6 @@
     entity_id: automation.turn_on_entry_lights_from_kitchen_entry_switch
     service: automation.turn_on
   mode: single
-
 - id: turn_on_entry_lights_kitchen
   alias: Turn on entry lights from kitchen entry switch
   trigger:
@@ -52,9 +49,9 @@
   alias: Turn off entry lights from garage entry switch
   trigger:
   - platform: state
-    entity_id: switch.garage_entry_30
     from: 'on'
     to: 'off'
+    entity_id: input_boolean.garage_entry
   action:
   - data: {}
     entity_id: automation.turn_off_entry_lights_from_kitchen_entry_switch
@@ -66,7 +63,6 @@
   - data: {}
     entity_id: automation.turn_off_entry_lights_from_kitchen_entry_switch
     service: automation.turn_on
-
 - id: turn_off_entry_lights_kitchen
   alias: Turn off entry lights from kitchen entry switch
   trigger:
@@ -155,31 +151,37 @@
   condition: []
   action:
   - data: {}
-    entity_id: switch.patio_lights_49
     service: switch.turn_on
+    target:
+      entity_id:
+      - switch.patio_lights_49
   - data: {}
     entity_id: switch.patio_tree_spots_50
     service: switch.turn_on
   - data: {}
     entity_id: light.front_porch_light_48
     service: light.turn_on
+  mode: single
 - id: '1589937131228'
   alias: turn_off_outdoor_lights_at_bedtime
   description: Turn off outdoor lights at bedtime
   trigger:
-  - at: '23:00:00'
+  - at: '23:59:00'
     platform: time
   condition: []
   action:
   - data: {}
-    entity_id: switch.patio_lights_49
     service: switch.turn_off
+    target:
+      entity_id:
+      - switch.patio_lights_49
   - data: {}
     entity_id: switch.patio_tree_spots_50
     service: switch.turn_off
   - data: {}
     entity_id: light.front_porch_light_48
     service: light.turn_off
+  mode: single
 - id: '1607698084703'
   alias: Update Google Assistant at HA startup
   description: ''
@@ -191,8 +193,6 @@
   - service: google_assistant.request_sync
     data: {}
   mode: single
-
-### Simulate Arrival
 - id: simulate_arrival
   alias: Simulate arrival
   trigger:
@@ -204,7 +204,7 @@
   - platform: event
     event_type: event_simulate_arrival
   condition:
-    condition: and
+  - condition: and
     conditions:
     - condition: state
       entity_id: sun.sun
@@ -216,28 +216,25 @@
       state: armed_away
   action:
   - delay: 00:{{ (range(10, 45) | random) }}:00
-  - service: switch.turn_on
-    data:
-      entity_id: switch.garage_entry_30
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.garage_entry
   - delay: 00:{{ (range(2, 10) | random) }}:00
   - event: event_simulate_arrival_off
   - event: event_simulate_arrival
-
 - id: simulate_arrival_off
   alias: Simulate arrival off
   trigger:
   - platform: event
     event_type: event_simulate_arrival_off
   condition:
-    condition: state
+  - condition: state
     entity_id: alarm_control_panel.abode_alarm
     state: armed_away
   action:
-  - service: switch.turn_off
-    data:
-      entity_id: switch.garage_entry_30
-
-### Simulate Kitchen Presence
+  - service: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.garage_entry
 - id: simulate_kitchen_presence
   alias: Simulate kitchen presence
   trigger:
@@ -279,7 +276,6 @@
   - event: event_simulate_kitchen_presence_off
   - delay: 00:{{ (range(2, 20) | random) }}:00
   - event: event_simulate_kitchen_presence
-
 - id: simulate_kitchen_presence_off
   alias: Simulate kitchen presence off
   trigger:
@@ -293,8 +289,6 @@
   - service: light.turn_off
     data:
       entity_id: light.kitchen_pendants_9
-
-### Simulate Upstairs Presence
 - id: simulate_upstairs_presence
   alias: Simulate upstairs presence
   trigger:
@@ -336,7 +330,6 @@
   - event: event_simulate_upstairs_presence_off
   - delay: 00:{{ (range(5, 25) | random) }}:00
   - event: event_simulate_upstairs_presence
-
 - id: simulate_upstairs_presence_off
   alias: Simulate upstairs presence off
   trigger:
@@ -350,6 +343,51 @@
   - service: switch.turn_off
     data:
       entity_id: switch.stairwell_lights_24
-
-
-
+- id: '1632597804453'
+  alias: Auto-close garage door 1
+  description: Auto-close garage door 1 when open for 5 minutes from 9:00PM to 7:00AM
+  trigger:
+  - platform: state
+    entity_id: cover.garage_door_1
+    to: open
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  condition:
+  - condition: time
+    after: '21:00:00'
+    before: 07:00:00
+  action:
+  - service: cover.close_cover
+    target:
+      entity_id: cover.garage_door_1
+  - service: notify.notify_events
+    data:
+      message: Garage door 1 automatically closed
+  mode: single
+- id: '1632599500825'
+  alias: Auto-close garage door 2 when open for 5 minutes from 9:00PM to 7:00AM
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: cover.garage_door_2
+    to: open
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  condition:
+  - condition: time
+    after: '21:00:00'
+    before: 07:00:00
+  action:
+  - service: cover.close_cover
+    target:
+      entity_id: cover.garage_door_2
+  - service: notify.notify_events
+    data:
+      message: Garage door 2 automatically closed
+  mode: single
