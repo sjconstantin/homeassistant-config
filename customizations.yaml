@@ -2,13 +2,13 @@
        icon: mdi:coach-lamp
     switch.back_porch_light_12:
        icon: mdi:spotlight-beam
-    switch.patio_tree_spots_50:
+    switch.patio_tree_spots_57:
        icon: mdi:spotlight-beam
     switch.garage_overhead_16:
        icon: mdi:lightbulb
     switch.hallway_overhead_5:
        icon: mdi:ceiling-light
-    switch.kitchen_entry_11:
+    switch.kitchen_entry_56:
        icon: mdi:lightbulb
     switch.towel_warmer_33:
        icon: mdi:radiator
@@ -20,4 +20,10 @@
        friendly_name: Garage Door 2
        google_assistant: true
        google_assistant_type: switch
+    light.fixturesmart_v3_0:
+       deviceId: !secret bar_sink__light_device_id
+    light.under_cabinet_light:
+       deviceId: !secret range_light_left_device_id
+    light.under_cabinet_light_2:
+       deviceId: !secret range_light_right_device_id
 

@@ -7,7 +7,7 @@
       - light.post_light_52
       - switch.back_porch_light_12
       - switch.patio_lights_49
-      - switch.patio_tree_spots_50
+      - switch.patio_tree_spots_57
   common:
     name: 'Common Area'
     entities:
@@ -36,7 +36,24 @@
     entities:
       - light.kitchen_pendants_9
       - light.kitchen_spots_10
-      - switch.kitchen_entry_11
+      - switch.kitchen_entry_56
+      - light.fixturesmart_v3_0
+      - light.under_cabinet_light
+      - light.under_cabinet_light_2
+  kitchen_lights:
+    name: 'Kitchen Lights'
+    entities:
+      - light.kitchen_pendants_9
+      - light.kitchen_spots_10
+      - light.fixturesmart_v3_0
+      - light.under_cabinet_light
+      - light.under_cabinet_light_2
+  kitchen_cabinet_lights:
+    name: 'Kitchen Cabinet Lights'
+    entities:
+      - light.fixturesmart_v3_0
+      - light.under_cabinet_light
+      - light.under_cabinet_light_2
   network:
     name: 'Network'
     entities:

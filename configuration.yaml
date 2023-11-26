@@ -1,10 +1,9 @@
 homeassistant:
-
   customize: !include customizations.yaml
 
 # Enables logging
 logger:
-  default: warning
+  default: info
 #  logs:
 #    homeassistant.components.alert: debug
 #    homeassistant.components.smtp: debug
@@ -33,11 +32,8 @@ http:
 # history recording
 recorder:
 
-# Checks for available updates
-updater:
-
 # Discover some devices automatically
-discovery:
+#discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
@@ -66,12 +62,12 @@ vera:
 ecobee:
   api_key: !secret ecobee_api_key
 
-mqtt:
-  broker: !secret mqtt_broker
-  port: !secret mqtt_port
-  username: !secret mqtt_username
-  password: !secret mqtt_password
-  certificate: auto
+#mqtt:
+#  broker: !secret mqtt_broker
+#  port: !secret mqtt_port
+#  username: !secret mqtt_username
+#  password: !secret mqtt_password
+#  certificate: auto
 
 notify_events:
   token: !secret notify_events_token
@@ -102,5 +98,11 @@ script: !include scripts.yaml
 notify: !include notify.yaml
 alert: !include alert.yaml
 template: !include template.yaml
+scene: !include scenes.yaml
 #sensor: !include sensors.yaml
 
+python_script:
+
+pyscript:
+  allow_all_imports: true
+  hass_is_global: true

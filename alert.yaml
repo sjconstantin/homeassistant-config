@@ -6,7 +6,6 @@
     repeat: 10
     skip_first: true
     notifiers:
-      - hangouts
       - notify_events
   garage_door_2:
     name: Garage door 2 is open
@@ -16,6 +15,5 @@
     repeat: 10
     skip_first: true
     notifiers:
-      - hangouts
       - notify_events
 

@@ -11,6 +11,7 @@
 /home-assistant_v2.db-wal
 /.storage/
 /creds.data
+/custom_components/
 
 automations-backup.yaml
 
@@ -21,3 +22,4 @@ SERVICE_ACCOUNT.json
 gactions
 *.log.*
 *.yaml.deprecated
+home-assistant_v2.db.save

@@ -1,6 +1,2 @@
-  - name: hangouts
-    platform: hangouts
-    default_conversations:
-      - id: "UgxLjK-Tn-TFK08Hs694AaABAQ"
   - name: notify.events
     platform: notify_events
