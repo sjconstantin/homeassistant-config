@@ -458,41 +458,19 @@
     data: {}
   mode: single
 - id: '1700944549387'
-  alias: Reset Bar Sink Light
-  description: ''
+  alias: Reset Kitchen Cabinet Light
+  description: Reset kitchen cabinet light to working scene when turned off
   trigger:
   - platform: device
     type: turned_off
     device_id: e4b724e0861282dedd32e7da64d0369d
     entity_id: 0e8c23020a37770e04a5658a16f5b714
     domain: light
-  condition: []
-  action:
-  - service: pyscript.change_scene
-    data:
-      deviceId: '{{ state_attr(''light.fixturesmart_v3_0'', ''deviceId'') }}'
-      scene: working
-  mode: single
-- id: '1700946390271'
-  alias: Reset Range Light Left
-  description: ''
-  trigger:
   - platform: device
     type: turned_off
     device_id: 9dd95867dceb79471082266db9796f4c
     entity_id: 44bf0dc3f2f9af9fb929b81af3eb2061
     domain: light
-  condition: []
-  action:
-  - service: pyscript.change_scene
-    data:
-      deviceId: '{{ state_attr(''light.under_cabinet_light'', ''deviceId'') }}'
-      scene: working
-  mode: single
-- id: '1700946603582'
-  alias: Reset Range Light Right
-  description: ''
-  trigger:
   - platform: device
     type: turned_off
     device_id: 65733c61fcb51df840b5bc159becee52
@@ -500,8 +478,7 @@
     domain: light
   condition: []
   action:
-  - service: pyscript.change_scene
+  - service: pyscript.reset_light
     data:
-      deviceId: '{{ state_attr(''light.under_cabinet_light_2'', ''deviceId'') }}'
-      scene: working
+      device: '{{ trigger.entity_id }}'
   mode: single

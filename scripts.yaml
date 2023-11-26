@@ -91,95 +91,52 @@ turn_off_humidifier:
     target:
       device_id: 8f0860072d324d39ade0668ea7b19158
   mode: single
-reset_kitchen_cabinet_light:
-  alias: Reset Kitchen Cabinet Lights
+kitchen_gorgeous:
+  alias: Kitchen Gorgeous
   sequence:
-  - service: pyscript.change_scene
+  - service: pyscript.change_kitchen_cabinet_lights_scene
     data:
-      deviceId: light.fixturesmart_v3_0.deviceId
-      scene: working
+      scene: gorgeous
+  mode: single
+kitchen_reading:
+  alias: Kitchen Reading
+  sequence:
+  - service: pyscript.change_kitchen_cabinet_lights_scene
+    data:
+      scene: read
   mode: single
 kitchen_working:
   alias: Kitchen Working
   sequence:
-  - type: turn_on
-    device_id: e4b724e0861282dedd32e7da64d0369d
-    entity_id: 0e8c23020a37770e04a5658a16f5b714
-    domain: light
-  - service: pyscript.change_scene
+  - service: pyscript.change_kitchen_cabinet_lights_scene
     data:
-      deviceId: '{{ state_attr(''light.fixturesmart_v3_0'', ''deviceId'') }}'
-      scene: working
-  - type: turn_on
-    device_id: 9dd95867dceb79471082266db9796f4c
-    entity_id: 44bf0dc3f2f9af9fb929b81af3eb2061
-    domain: light
-  - service: pyscript.change_scene
-    data:
-      deviceId: '{{ state_attr(''light.under_cabinet_light'', ''deviceId'') }}'
-      scene: working
-  - type: turn_on
-    device_id: 65733c61fcb51df840b5bc159becee52
-    entity_id: 2ff0ae5182de066e1f22111ba56578a9
-    domain: light
-  - service: pyscript.change_scene
-    data:
-      deviceId: '{{ state_attr(''light.under_cabinet_light_2'', ''deviceId'') }}'
       scene: working
   mode: single
-kitchen_night:
-  alias: Kitchen Night
+kitchen_leisure:
+  alias: Kitchen Leisure
   sequence:
-  - type: turn_on
-    device_id: e4b724e0861282dedd32e7da64d0369d
-    entity_id: 0e8c23020a37770e04a5658a16f5b714
-    domain: light
-  - service: pyscript.change_scene
+  - service: pyscript.change_kitchen_cabinet_lights_scene
     data:
-      deviceId: '{{ state_attr(''light.fixturesmart_v3_0'', ''deviceId'') }}'
-      scene: night
-  - type: turn_on
-    device_id: 9dd95867dceb79471082266db9796f4c
-    entity_id: 44bf0dc3f2f9af9fb929b81af3eb2061
-    domain: light
-  - service: pyscript.change_scene
-    data:
-      deviceId: '{{ state_attr(''light.under_cabinet_light'', ''deviceId'') }}'
-      scene: night
-  - type: turn_on
-    device_id: 65733c61fcb51df840b5bc159becee52
-    entity_id: 2ff0ae5182de066e1f22111ba56578a9
-    domain: light
-  - service: pyscript.change_scene
-    data:
-      deviceId: '{{ state_attr(''light.under_cabinet_light_2'', ''deviceId'') }}'
-      scene: night
+      scene: leisure
   mode: single
-kitchen_gorgeous:
-  alias: Kitchen Gorgeous
+kitchen_soft:
+  alias: Kitchen Soft
   sequence:
-  - type: turn_on
-    device_id: e4b724e0861282dedd32e7da64d0369d
-    entity_id: 0e8c23020a37770e04a5658a16f5b714
-    domain: light
-  - service: pyscript.change_scene
+  - service: pyscript.change_kitchen_cabinet_lights_scene
     data:
-      deviceId: '{{ state_attr(''light.fixturesmart_v3_0'', ''deviceId'') }}'
-      scene: gorgeous
-  - type: turn_on
-    device_id: 9dd95867dceb79471082266db9796f4c
-    entity_id: 44bf0dc3f2f9af9fb929b81af3eb2061
-    domain: light
-  - service: pyscript.change_scene
+      scene: soft
+  mode: single
+kitchen_colorful:
+  alias: Kitchen Colorful
+  sequence:
+  - service: pyscript.change_kitchen_cabinet_lights_scene
     data:
-      deviceId: '{{ state_attr(''light.under_cabinet_light'', ''deviceId'') }}'
-      scene: gorgeous
-  - type: turn_on
-    device_id: 65733c61fcb51df840b5bc159becee52
-    entity_id: 2ff0ae5182de066e1f22111ba56578a9
-    domain: light
-  - service: pyscript.change_scene
+      scene: colorful
+  mode: single
+kitchen_dazzling:
+  alias: Kitchen Dazzling
+  sequence:
+  - service: pyscript.change_kitchen_cabinet_lights_scene
     data:
-      deviceId: '{{ state_attr(''light.under_cabinet_light_2'', ''deviceId'') }}'
-      scene: gorgeous
+      scene: dazzling
   mode: single
