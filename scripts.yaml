@@ -103,7 +103,7 @@ kitchen_reading:
   sequence:
   - service: pyscript.change_kitchen_cabinet_lights_scene
     data:
-      scene: read
+      scene: reading
   mode: single
 kitchen_working:
   alias: Kitchen Working
