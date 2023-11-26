@@ -255,9 +255,15 @@
       state: armed_away
   action:
   - delay: 00:{{ (range(10, 45) | random) }}:00
-  - service: input_boolean.turn_on
-    target:
-      entity_id: input_boolean.garage_entry
+  - if:
+    - condition: state
+      entity_id: alarm_control_panel.abode_alarm
+      state: armed_away
+    then:
+    - service: input_boolean.turn_on
+      data: {}
+      target:
+        entity_id: input_boolean.garage_entry
   - delay: 00:{{ (range(2, 10) | random) }}:00
   - event: event_simulate_arrival_off
   - event: event_simulate_arrival
