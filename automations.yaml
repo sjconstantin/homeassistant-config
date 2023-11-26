@@ -463,7 +463,7 @@
   - service: script.turn_off_humidifier
     data: {}
   mode: single
-- id: '1700944549387'
+- id: '1701036644916'
   alias: Reset Kitchen Cabinet Light
   description: Reset kitchen cabinet light to working scene when turned off
   trigger:
@@ -487,4 +487,4 @@
   - service: pyscript.reset_light
     data:
       device: '{{ trigger.entity_id }}'
-  mode: single
+  mode: parallel
