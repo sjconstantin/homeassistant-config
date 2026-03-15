@@ -1,37 +1,37 @@
 - id: turn_on_entry_lights_arrival
   alias: Turn on entry lights when I arrive at night
   description: ''
-  trigger:
-  - platform: device
-    device_id: 442f07fb47fb8d5df817f75fc8eb9b46
+  triggers:
+  - device_id: 22b8e10abfd0696822f3b1fbc8788da9
     domain: cover
-    entity_id: cover.garage_door_1
+    entity_id: 8fec5e312663e010578433b6c54f7712
     type: opening
-  - platform: device
-    device_id: 56b4edbbe4528c577c61ab17051f08f3
+    trigger: device
+  - device_id: 56b4edbbe4528c577c61ab17051f08f3
     domain: cover
     entity_id: cover.garage_door_2
     type: opening
-  - platform: device
-    device_id: 442f07fb47fb8d5df817f75fc8eb9b46
+    trigger: device
+  - device_id: 22b8e10abfd0696822f3b1fbc8788da9
     domain: cover
-    entity_id: cover.garage_door_1
+    entity_id: 8fec5e312663e010578433b6c54f7712
     type: opened
-  - platform: device
-    device_id: 56b4edbbe4528c577c61ab17051f08f3
+    trigger: device
+  - device_id: 56b4edbbe4528c577c61ab17051f08f3
     domain: cover
     entity_id: cover.garage_door_2
     type: opened
-  condition:
+    trigger: device
+  conditions:
   - condition: or
     conditions:
     - condition: sun
       after: sunset
     - condition: sun
       before: sunrise
-  action:
-  - service: script.entry_lights_on_from_garage
-    data: {}
+  actions:
+  - data: {}
+    action: script.entry_lights_on_from_garage
 - id: turn_on_entry_lights_garage
   alias: Turn on entry lights from garage entry switch
   trigger:
@@ -230,7 +230,8 @@
   condition: []
   action:
   - service: google_assistant.request_sync
-    data: {}
+    data:
+      agent_user_id: 6ba08802595a4d5aa5ffe925af351fd7
   mode: single
 - id: simulate_arrival
   alias: Simulate arrival
@@ -347,7 +348,7 @@
   - platform: event
     event_type: event_simulate_upstairs_presence
   condition:
-    condition: or
+  - condition: or
     conditions:
     - condition: and
       conditions:
@@ -369,8 +370,10 @@
         state: armed_away
   action:
   - service: switch.turn_on
-    data:
-      entity_id: switch.stairwell_lights_24
+    data: {}
+    target:
+      entity_id:
+      - switch.stairwell_lights_62
   - delay: 00:{{ (range(5, 15) | random) }}:00
   - event: event_simulate_upstairs_presence_off
   - delay: 00:{{ (range(5, 25) | random) }}:00
@@ -381,13 +384,15 @@
   - platform: event
     event_type: event_simulate_upstairs_presence_off
   condition:
-    condition: state
+  - condition: state
     entity_id: alarm_control_panel.abode_alarm
     state: armed_away
   action:
   - service: switch.turn_off
-    data:
-      entity_id: switch.stairwell_lights_24
+    data: {}
+    target:
+      entity_id:
+      - switch.stairwell_lights_62
 - id: '1632597804453'
   alias: Auto-close garage door 1
   description: Auto-close garage door 1 when open for 5 minutes from 9:00PM to 7:00AM
@@ -439,14 +444,14 @@
 - id: '1670800960135'
   alias: Turn on humidifier when alarm is armed away
   description: ''
-  trigger:
+  triggers:
   - platform: state
     entity_id:
     - alarm_control_panel.abode_alarm
     to: armed_away
-  condition: []
-  action:
-  - service: script.turn_on_humidifier
+  conditions: []
+  actions:
+  - action: script.turn_on_humidifier_when_heat_is_on
     data: {}
   mode: single
 - id: '1670801146205'
@@ -466,25 +471,105 @@
 - id: '1701036644916'
   alias: Reset Kitchen Cabinet Light
   description: Reset kitchen cabinet light to working scene when turned off
-  trigger:
-  - platform: device
-    type: turned_off
+  triggers:
+  - type: turned_off
     device_id: e4b724e0861282dedd32e7da64d0369d
     entity_id: 0e8c23020a37770e04a5658a16f5b714
     domain: light
-  - platform: device
-    type: turned_off
-    device_id: 9dd95867dceb79471082266db9796f4c
-    entity_id: 44bf0dc3f2f9af9fb929b81af3eb2061
+    trigger: device
+  - type: turned_off
+    device_id: b65dd24e4755bd7404674198bb648e17
+    entity_id: 1e51f301d3bd73ff4cc8087a215bc547
     domain: light
-  - platform: device
-    type: turned_off
-    device_id: 65733c61fcb51df840b5bc159becee52
-    entity_id: 2ff0ae5182de066e1f22111ba56578a9
+    trigger: device
+  - type: turned_off
+    device_id: 2cda77d8a5b6fef24fd7bb6be2ecc20c
+    entity_id: 905ff99b6219929720f2d3c03c890cd4
     domain: light
+    trigger: device
+  conditions: []
+  actions:
+  - data:
+      device: '{{ trigger.entity_id }}'
+    action: pyscript.reset_light
+  mode: queued
+  max: 10
+- id: '1710972514855'
+  alias: Turn off outdoor lights at dawn
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id:
+    - sun.sun
+    attribute: elevation
+    above: 2
   condition: []
   action:
-  - service: pyscript.reset_light
+  - service: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.patio_lights_49
+  - service: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.patio_tree_spots_57
+  - service: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.front_porch_light_48
+  mode: single
+- id: '1711293459601'
+  alias: 'Record person '
+  description: ''
+  triggers:
+  - device_id: 27ecc0c8c7fa8884a836207c555656c4
+    domain: nest
+    type: camera_person
+    trigger: device
+  conditions: []
+  actions:
+  - metadata: {}
     data:
-      device: '{{ trigger.entity_id }}'
-  mode: parallel
+      duration: 30
+      lookback: 0
+      filename: /volume1/main/Video/Front Door/{{ now().strftime("%Y%m%d-%H%M%S")
+        }}.mp4
+    target:
+      device_id: 27ecc0c8c7fa8884a836207c555656c4
+    action: camera.record
+  mode: single
+- id: '1732768507536'
+  alias: 'Turo on front porch light before dawn '
+  description: ''
+  triggers:
+  - entity_id:
+    - sun.sun
+    attribute: elevation
+    above: -2
+    trigger: numeric_state
+  conditions: []
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.front_porch_light_48
+  mode: single
+- id: '1733091832519'
+  alias: Weekly backup
+  description: Weekly backup
+  triggers:
+  - at: 01:00:00
+    trigger: time
+  conditions:
+  - condition: time
+    weekday:
+    - sun
+  actions:
+  - action: backup.create
+    metadata: {}
+    data: {}
+  mode: single

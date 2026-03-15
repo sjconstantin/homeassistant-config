@@ -12,7 +12,7 @@
 /.storage/
 /creds.data
 /custom_components/
-
+.cache
 automations-backup.yaml
 
 *.pickle
@@ -23,3 +23,8 @@ gactions
 *.log.*
 *.yaml.deprecated
 home-assistant_v2.db.save
+.ha_run.lock
+*.db
+*.bak
+/backups
+Abode/cookies.json

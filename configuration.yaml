@@ -17,7 +17,7 @@ logger:
 frontend:
 
 # Enables the configuration component
-config:
+default_config:
 
 http:
   ssl_certificate: !secret ssl_certificate
@@ -59,8 +59,8 @@ system_health:
 vera:
   vera_controller_url: !secret vera_controller_url
 
-ecobee:
-  api_key: !secret ecobee_api_key
+#ecobee:
+#  api_key: !secret ecobee_api_key
 
 #mqtt:
 #  broker: !secret mqtt_broker
@@ -80,16 +80,16 @@ owntracks:
     - ram
   events_only: false
 
-map:
+#map:
 
 google_assistant:
   project_id: !secret google_project_id
   service_account: !include SERVICE_ACCOUNT.json
 
-media_player:
-  - platform: kodi
-    host: !secret kodi_host
-    port: !secret kodi_port
+#media_player:
+#  - platform: kodi
+#    host: !secret kodi_host
+#    port: !secret kodi_port
 
 #cover: !include covers.yaml
 automation: !include automations.yaml

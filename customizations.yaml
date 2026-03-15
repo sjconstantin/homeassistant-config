@@ -4,7 +4,7 @@
        icon: mdi:spotlight-beam
     switch.patio_tree_spots_57:
        icon: mdi:spotlight-beam
-    switch.garage_overhead_16:
+    light.garage_overhead_58:
        icon: mdi:lightbulb
     switch.hallway_overhead_5:
        icon: mdi:ceiling-light
@@ -22,8 +22,14 @@
        google_assistant_type: switch
     light.fixturesmart_v3_0:
        deviceId: !secret bar_sink__light_device_id
-    light.under_cabinet_light:
+    light.range_light_left:
        deviceId: !secret range_light_left_device_id
-    light.under_cabinet_light_2:
+    light.range_light_right:
        deviceId: !secret range_light_right_device_id
+    light.kitchen:
+       google_assistant: true
+       google_assistant_type: light
+    light.kitchen_cabinets:
+       google_assistant: true
+       google_assistant_type: light
 

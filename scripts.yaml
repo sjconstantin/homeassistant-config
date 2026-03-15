@@ -7,14 +7,17 @@ entry_lights_on:
       entity_id:
       - switch.kitchen_entry_56
       - switch.back_porch_light_12
-      - switch.garage_door_51
-      - switch.garage_overhead_16
+      - switch.man_door_59
   - service: input_boolean.turn_on
     target:
       entity_id: input_boolean.garage_entry
-  - data:
-      entity_id: light.post_light_52
+    data: {}
+  - data: {}
     service: light.turn_on
+    target:
+      entity_id:
+      - light.post_light_52
+      - light.garage_overhead_58
   mode: single
 entry_lights_on_from_garage:
   alias: Turn on entry lights from garage
@@ -33,14 +36,17 @@ entry_lights_off:
       entity_id:
       - switch.kitchen_entry_56
       - switch.back_porch_light_12
-      - switch.garage_door_51
-      - switch.garage_overhead_16
+      - switch.man_door_59
   - service: input_boolean.turn_off
     target:
       entity_id: input_boolean.garage_entry
-  - data:
-      entity_id: light.post_light_52
+    data: {}
+  - data: {}
     service: light.turn_off
+    target:
+      entity_id:
+      - light.post_light_52
+      - light.garage_overhead_58
   mode: single
 disable_entry_lights_automations:
   alias: Disable entry lights automations
@@ -71,17 +77,6 @@ turn_on_entry_lights_when_leaving_after_dark:
   - service: switch.turn_on
     data: {}
     entity_id: switch.kitchen_entry_56
-  mode: single
-turn_on_humidifier:
-  alias: Turn on humidifier if climate mode is heat
-  sequence:
-  - condition: state
-    entity_id: climate.main_floor
-    state: heat
-  - service: humidifier.turn_on
-    data: {}
-    target:
-      device_id: 8f0860072d324d39ade0668ea7b19158
   mode: single
 turn_off_humidifier:
   alias: Turn off humidifier
@@ -140,3 +135,22 @@ kitchen_dazzling:
     data:
       scene: dazzling
   mode: single
+kitchen_night:
+  alias: Kitchen Night
+  sequence:
+  - service: pyscript.change_kitchen_cabinet_lights_scene
+    data:
+      scene: night
+  mode: single
+turn_on_humidifier_when_heat_is_on:
+  alias: Turn on humidifier when heat is on
+  sequence:
+  - action: humidifier.turn_on
+    metadata: {}
+    data: {}
+    target:
+      device_id: 8f0860072d324d39ade0668ea7b19158
+  - condition: state
+    entity_id: climate.main_floor
+    state: heat
+  description: ''

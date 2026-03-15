@@ -19,5 +19,5 @@ def change_kitchen_cabinet_lights_scene(scene=None):
     log.info(f'Changing kitchen cabinet lights scene to {scene}')
 
     send_commands(light.fixturesmart_v3_0.deviceId, get_commands(scene));
-    send_commands(light.under_cabinet_light.deviceId, get_commands(scene));
-    send_commands(light.under_cabinet_light_2.deviceId, get_commands(scene));
+    send_commands(light.range_light_left.deviceId, get_commands(scene));
+    send_commands(light.range_light_right.deviceId, get_commands(scene));
