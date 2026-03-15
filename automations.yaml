@@ -108,76 +108,6 @@
   - data: {}
     entity_id: automation.turn_off_entry_lights_from_garage_entry_switch
     service: automation.turn_on
-- id: turn_on_towel_warmer_weekday_mornings
-  alias: Turn on towel warmer weekday mornings
-  trigger:
-  - platform: time
-    at: 05:00:00
-  condition:
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
-    before: 00:00:00
-  action:
-  - service: switch.turn_on
-    data: {}
-    target:
-      entity_id: switch.towel_warmer_53
-- id: turn_off_towel_warmer_weekday_mornings
-  alias: Turn off towel warmer weekday mornings
-  trigger:
-  - platform: time
-    at: 09:00:00
-  condition:
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
-    before: 00:00:00
-  action:
-  - service: switch.turn_off
-    data: {}
-    target:
-      entity_id: switch.towel_warmer_53
-- id: turn_on_towel_warmer_weekend_mornings
-  alias: Turn on towel warmer weekend mornings
-  trigger:
-  - platform: time
-    at: 07:00:00
-  condition:
-  - condition: time
-    weekday:
-    - sat
-    - sun
-    before: 00:00:00
-  action:
-  - service: switch.turn_on
-    data: {}
-    target:
-      entity_id: switch.towel_warmer_53
-- id: turn_off_towel_warmer_weekend_mornings
-  alias: Turn off towel warmer weekend mornings
-  trigger:
-  - platform: time
-    at: '12:00:00'
-  condition:
-  - condition: time
-    weekday:
-    - sat
-    - sun
-    before: 00:00:00
-  action:
-  - service: switch.turn_off
-    data: {}
-    target:
-      entity_id: switch.towel_warmer_53
 - id: '1589936680579'
   alias: turn_on_outdoor_lights_at_dusk
   description: Turn on outdoor lights at dusk
@@ -542,7 +472,7 @@
     action: camera.record
   mode: single
 - id: '1732768507536'
-  alias: 'Turo on front porch light before dawn '
+  alias: 'Turn on front porch light before dawn'
   description: ''
   triggers:
   - entity_id:

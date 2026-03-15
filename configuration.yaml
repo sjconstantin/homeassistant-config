@@ -85,6 +85,7 @@ owntracks:
 google_assistant:
   project_id: !secret google_project_id
   service_account: !include SERVICE_ACCOUNT.json
+  secure_devices_pin: !secret google_secure_devices_pin
 
 #media_player:
 #  - platform: kodi

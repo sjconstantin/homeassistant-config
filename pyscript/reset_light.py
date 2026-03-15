@@ -1,8 +1,5 @@
 from send_tuya_device_commands import send_commands
 
-def get_commands(scene):
-    return 
-
 @service
 def reset_light(device=None):
     log.info(f'Resetting light {device}')
