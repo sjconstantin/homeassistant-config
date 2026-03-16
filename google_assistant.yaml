@@ -1,0 +1,109 @@
+project_id: !secret google_project_id
+service_account: !include SERVICE_ACCOUNT.json
+secure_devices_pin: !secret google_secure_devices_pin
+expose_by_default: false
+entity_config:
+  cover.garage_door_1:
+    expose: true
+    name: Garage Door 1
+    room: Garage
+  cover.garage_door_2:
+    expose: true
+    name: Garage Door 2
+    room: Garage
+  light.kitchen_pendants_9:
+    expose: true
+    name: Kitchen Pendants
+    room: Kitchen
+  light.kitchen_spots_10:
+    expose: true
+    name: Kitchen Spots
+    room: Kitchen
+  light.kitchen_cabinets:
+    expose: true
+    name: Kitchen Cabinets
+    room: Kitchen
+  light.front_porch_light_48:
+    expose: true
+    name: Front Porch Light
+    room: Outside
+  light.post_light_52:
+    expose: true
+    name: Back Yard Post Light
+    room: Outside
+  light.garage_overhead_58:
+    expose: true
+    name: Garage Overhead
+    room: Garage
+  switch.back_porch_light_12:
+    expose: true
+    name: Back Porch Light
+    room: Outside
+  switch.patio_lights_49:
+    expose: true
+    name: Patio Lights
+    room: Outside
+  switch.patio_tree_spots_57:
+    expose: true
+    name: Patio Tree Spots
+    room: Outside
+  switch.hallway_overhead_5:
+    expose: true
+    name: Hallway Overhead
+    room: Hallway
+  switch.kitchen_entry_56:
+    expose: true
+    name: Kitchen Entry
+    room: Kitchen
+  switch.man_door_59:
+    expose: true
+    name: Man Door
+    room: Garage
+  switch.stairwell_lights_62:
+    expose: true
+    name: Stairwell Lights
+    room: Hallway
+  input_boolean.garage_entry:
+    expose: true
+    name: Garage Entry
+    room: Garage
+  script.kitchen_gorgeous:
+    expose: true
+    name: Kitchen Gorgeous
+    room: Kitchen
+  script.kitchen_reading:
+    expose: true
+    name: Kitchen Reading
+    room: Kitchen
+  script.kitchen_working:
+    expose: true
+    name: Kitchen Working
+    room: Kitchen
+  script.kitchen_leisure:
+    expose: true
+    name: Kitchen Leisure
+    room: Kitchen
+  script.kitchen_soft:
+    expose: true
+    name: Kitchen Soft
+    room: Kitchen
+  script.kitchen_colorful:
+    expose: true
+    name: Kitchen Colorful
+    room: Kitchen
+  script.kitchen_dazzling:
+    expose: true
+    name: Kitchen Dazzling
+    room: Kitchen
+  script.kitchen_night:
+    expose: true
+    name: Kitchen Night
+    room: Kitchen
+  script.turn_on_humidifier_when_heat_is_on:
+    expose: true
+    name: Turn on Humidifier When Heat is On
+    room: Automations
+  script.turn_off_humidifier:
+    expose: true
+    name: Turn off Humidifier
+    room: Automations

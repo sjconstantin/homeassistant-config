@@ -14,12 +14,10 @@
        icon: mdi:radiator
     cover.garage_door_1:
        friendly_name: Garage Door 1
-       google_assistant: true
-       google_assistant_type: switch
+       google_assistant_type: garage
     cover.garage_door_2:
        friendly_name: Garage Door 2
-       google_assistant: true
-       google_assistant_type: switch
+       google_assistant_type: garage
     light.fixturesmart_v3_0:
        deviceId: !secret bar_sink__light_device_id
     light.range_light_left:
@@ -27,9 +25,7 @@
     light.range_light_right:
        deviceId: !secret range_light_right_device_id
     light.kitchen:
-       google_assistant: true
        google_assistant_type: light
     light.kitchen_cabinets:
-       google_assistant: true
        google_assistant_type: light
 
