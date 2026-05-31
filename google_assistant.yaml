@@ -107,3 +107,8 @@ entity_config:
     expose: true
     name: Turn off Humidifier
     room: Automations
+  script.turn_on_entry_lights_when_leaving_after_dark:
+    expose: true
+    name: Turn on Entry Lights when leaving after dark
+    room: Automations
+

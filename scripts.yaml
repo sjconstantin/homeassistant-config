@@ -145,12 +145,12 @@ kitchen_night:
 turn_on_humidifier_when_heat_is_on:
   alias: Turn on humidifier when heat is on
   sequence:
+  - condition: state
+    entity_id: climate.main_floor
+    state: heat
   - action: humidifier.turn_on
     metadata: {}
     data: {}
     target:
       device_id: 8f0860072d324d39ade0668ea7b19158
-  - condition: state
-    entity_id: climate.main_floor
-    state: heat
   description: ''
