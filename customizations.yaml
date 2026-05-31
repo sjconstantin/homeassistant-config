@@ -6,7 +6,7 @@
        icon: mdi:spotlight-beam
     light.garage_overhead_58:
        icon: mdi:lightbulb
-    switch.hallway_overhead_5:
+    switch.hallway_overhead_63:
        icon: mdi:ceiling-light
     switch.kitchen_entry_56:
        icon: mdi:lightbulb

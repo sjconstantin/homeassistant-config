@@ -86,7 +86,7 @@
     data: {}
   - service: switch.turn_off
     data:
-      entity_id: switch.hallway_overhead_5
+      entity_id: switch.hallway_overhead_63
   - data: {}
     entity_id: automation.turn_off_entry_lights_from_kitchen_entry_switch
     service: automation.turn_on

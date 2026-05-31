@@ -47,7 +47,7 @@ entity_config:
     expose: true
     name: Patio Tree Spots
     room: Outside
-  switch.hallway_overhead_5:
+  switch.hallway_overhead_63:
     expose: true
     name: Hallway Overhead
     room: Hallway

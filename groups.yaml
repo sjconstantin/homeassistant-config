@@ -11,7 +11,7 @@
   # common:
   #   name: 'Common Area'
   #   entities:
-  #     - switch.hallway_overhead_5
+  #     - switch.hallway_overhead_63
   #     - switch.stairwell_lights_60
   #     - light.front_porch_light_48
   #     - switch.towel_warmer_33
@@ -63,7 +63,7 @@
   #   name: 'Presence Simulators'
   #   entities:
   #     - light.kitchen_pendants_9
-  #     - switch.hallway_overhead_5
+  #     - switch.hallway_overhead_63
   #     - switch.stairwell_lights_60
   # tracker_devices:
   #   entities:
