@@ -28,3 +28,4 @@ home-assistant_v2.db.save
 *.bak
 /backups
 Abode/cookies.json
+/www/community/advanced-camera-card
